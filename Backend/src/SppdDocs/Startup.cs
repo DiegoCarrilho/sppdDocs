@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Reflection;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ using SppdDocs.Core;
 using SppdDocs.Core.Utils.Extensions;
 using SppdDocs.Core.Utils.Helpers;
 
-namespace SppdDocs.Api
+namespace SppdDocs
 {
 	public class Startup
 	{
@@ -27,6 +28,9 @@ namespace SppdDocs.Api
 		public void ConfigureServices(IServiceCollection services)
 		{
 			LoadApplicationAssemblies();
+
+			// Use AutoMapper
+			services.AddAutoMapper();
 
 			RegisterServiceRegistries(services);
 

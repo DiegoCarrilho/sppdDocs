@@ -13,4 +13,8 @@
     <ProjectReference Include="..\SppdDocs.Core\SppdDocs.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

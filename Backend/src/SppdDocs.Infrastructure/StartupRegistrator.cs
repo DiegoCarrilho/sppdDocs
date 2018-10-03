@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 using SppdDocs.Core;
-using SppdDocs.Core.Interfaces;
 using SppdDocs.Core.Services;
 using SppdDocs.Infrastructure.Services;
 
@@ -11,9 +10,7 @@ namespace SppdDocs.Infrastructure
 	{
 		public void RegisterService(IServiceCollection services)
 		{
-			services.AddScoped<IBasketService, BasketService>();
-			services.AddScoped<IOrderService, OrderService>();
-			services.AddTransient<IEmailSender, EmailSender>();
+			services.AddScoped<ICardService, CardService>();
 		}
 
 		public void ConfigureService(IServiceProvider serviceProvider)
