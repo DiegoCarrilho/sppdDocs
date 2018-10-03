@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace SppdDocs.Core.Domain.Filters
+namespace SppdDocs.Core.Domain.Specifications
 {
 	public interface ISpecification<T>
 	{

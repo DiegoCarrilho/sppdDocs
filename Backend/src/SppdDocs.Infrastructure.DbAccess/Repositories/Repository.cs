@@ -3,8 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SppdDocs.Core.Domain.Entities;
-using SppdDocs.Core.Domain.Filters;
 using SppdDocs.Core.Domain.Repositories;
+using SppdDocs.Core.Domain.Specifications;
 
 namespace SppdDocs.Infrastructure.DbAccess.Repositories
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using SppdDocs.Core.Domain.Entities;
-using SppdDocs.Core.Domain.Filters;
+using SppdDocs.Core.Domain.Specifications;
 
 namespace SppdDocs.Core.Domain.Repositories
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using SppdDocs.Core.Domain.Filters;
+using SppdDocs.Core.Domain.Specifications;
 
 namespace SppdDocs.Infrastructure.Specifications
 {
