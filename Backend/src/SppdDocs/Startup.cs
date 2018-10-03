@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using SppdDocs.Core;
 using SppdDocs.Core.Utils.Extensions;
 using SppdDocs.Core.Utils.Helpers;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace SppdDocs
 {
@@ -42,6 +43,11 @@ namespace SppdDocs
 			// 'Microsoft.Extensions.Logging.LoggerFactory' See: https://github.com/aspnet/Logging/issues/691
 			services.AddSingleton<ILoggerFactory>(sp => new LoggerFactory(sp.GetServices<ILoggerProvider>()));
 
+#if DEBUG
+			// Make SwaggerUI available
+			services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info {Title = "My API", Version = "v1"}); });
+#endif
+
 			RegisterServiceRegistries(services);
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -62,6 +68,15 @@ namespace SppdDocs
 			{
 				app.UseHsts();
 			}
+
+#if DEBUG
+			// Enable middleware to serve generated Swagger as a JSON endpoint.
+			app.UseSwagger();
+
+			// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+			// specifying the Swagger JSON endpoint.
+			app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"); });
+#endif
 
 			app.UseHttpsRedirection();
 			app.UseMvc();
