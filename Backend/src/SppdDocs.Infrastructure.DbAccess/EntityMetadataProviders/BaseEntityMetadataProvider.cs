@@ -12,7 +12,7 @@ namespace SppdDocs.Infrastructure.DbAccess.EntityMetadataProviders
 		{
 			var entriesToSetModifier = changeTracker.Entries<BaseEntity>().Where(e => HasToSetModifierMetadata(e.State)).ToList();
 
-			if (entriesToSetModifier.Count > 0)
+			if (entriesToSetModifier.Any())
 			{
 				var saveDate = DateTime.UtcNow;
 

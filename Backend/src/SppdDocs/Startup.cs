@@ -4,11 +4,13 @@ using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Reflection;
 using AutoMapper;
+using log4net;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using SppdDocs.Core;
 using SppdDocs.Core.Utils.Extensions;
 using SppdDocs.Core.Utils.Helpers;
@@ -17,6 +19,8 @@ namespace SppdDocs
 {
 	public class Startup
 	{
+		private static readonly ILog s_logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
 		public Startup(IConfiguration configuration)
 		{
 			Configuration = configuration;
@@ -27,19 +31,29 @@ namespace SppdDocs
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			s_logger.Debug("Start configuring services");
+
 			LoadApplicationAssemblies();
 
 			// Use AutoMapper
 			services.AddAutoMapper();
 
+			// Workaround to fix exception 'Cannot choose between multiple constructors with equal length 2 on type
+			// 'Microsoft.Extensions.Logging.LoggerFactory' See: https://github.com/aspnet/Logging/issues/691
+			services.AddSingleton<ILoggerFactory>(sp => new LoggerFactory(sp.GetServices<ILoggerProvider>()));
+
 			RegisterServiceRegistries(services);
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+			s_logger.Info("Services have been configured");
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 		{
+			s_logger.Debug("Start configuring application");
+
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
@@ -53,6 +67,8 @@ namespace SppdDocs
 			app.UseMvc();
 
 			ConfigureServices(app.ApplicationServices);
+
+			s_logger.Info("Application has been configured");
 		}
 
 		/// <summary>
@@ -83,6 +99,8 @@ namespace SppdDocs
 		/// </summary>
 		private static void LoadApplicationAssemblies()
 		{
+			s_logger.Debug("Start dynamic assembly loading");
+
 			var directoryCatalog = new DirectoryCatalog(AppDomain.CurrentDomain.BaseDirectory, $"{Constants.Application.SHORT_NAME}*.dll");
 			var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies().Where(a => !a.IsDynamic).ToList();
 			foreach (var assemblyFilePath in directoryCatalog.LoadedFiles)
@@ -93,8 +111,11 @@ namespace SppdDocs
 				{
 					// Load the application assembly if it hasn't already been loaded
 					Assembly.Load(assemblyFilePath);
+					s_logger.Info($"Dynamically loaded assembly '{assemblyFilePath}'");
 				}
 			}
+
+			s_logger.Info("Finished dynamically loading assemblies");
 		}
 
 		/// <summary>
