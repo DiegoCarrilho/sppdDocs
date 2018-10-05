@@ -13,7 +13,7 @@
 			/// <summary>
 			///     Relative path to the folder containing configurations
 			/// </summary>
-			public const string CONFIG_FOLDER = "Config";
+			public const string APP_CONFIG_FOLDER = "AppConfig";
 
 			/// <summary>
 			///     The log4net configuration file name

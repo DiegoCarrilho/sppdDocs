@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SppdDocs.Core;
+using SppdDocs.Core.Config;
 using SppdDocs.Core.Utils.Extensions;
 using SppdDocs.Core.Utils.Helpers;
 using SppdDocs.Extensions;
@@ -44,14 +45,18 @@ namespace SppdDocs
 			// 'Microsoft.Extensions.Logging.LoggerFactory' See: https://github.com/aspnet/Logging/issues/691
 			services.AddSingleton<ILoggerFactory>(sp => new LoggerFactory(sp.GetServices<ILoggerProvider>()));
 
-#if DEBUG
-			// Make SwaggerUI available
-			services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info {Title = "My API", Version = "v1"}); });
-#endif
-
 			RegisterServiceRegistries(services);
 
-			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+			// The configs are only available after the services have been registered
+			var generalConfig = GetGeneralConfig(services.BuildServiceProvider());
+			if (generalConfig.EnableSwaggerUI)
+			{
+				// Make SwaggerUI available
+				services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info {Title = "My API", Version = "v1"}); });
+			}
+
+			services.AddMvc()
+			        .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
 			s_logger.Info("Services have been configured");
 		}
@@ -59,6 +64,8 @@ namespace SppdDocs
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 		{
+			var generalConfig = GetGeneralConfig(app.ApplicationServices);
+
 			s_logger.Debug("Start configuring application");
 
 			if (env.IsDevelopment())
@@ -70,14 +77,18 @@ namespace SppdDocs
 				app.UseHsts();
 			}
 
-#if DEBUG
-			// Enable middleware to serve generated Swagger as a JSON endpoint.
-			app.UseSwagger();
+			if (generalConfig.EnableSwaggerUI)
+			{
+				// Enable middleware to serve generated Swagger as a JSON endpoint.
+				app.UseSwagger();
 
-			// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
-			// specifying the Swagger JSON endpoint.
-			app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"); });
-#endif
+				// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+				// specifying the Swagger JSON endpoint.
+				var swaggerEndpoint = "/swagger/v1/swagger.json";
+				app.UseSwaggerUI(c => { c.SwaggerEndpoint(swaggerEndpoint, "API V1"); });
+
+				s_logger.Info($"SwaggerUI has been enabled on '{swaggerEndpoint}'");
+			}
 
 			// Log all uncaught exceptions
 			app.UseGlobalExceptionHandler();
@@ -87,7 +98,7 @@ namespace SppdDocs
 
 			ConfigureServices(app.ApplicationServices);
 
-			s_logger.Info("Application has been configured");
+			s_logger.Info("Application is ready");
 		}
 
 		/// <summary>
@@ -153,6 +164,11 @@ namespace SppdDocs
 			{
 				yield return (TRegistry) Activator.CreateInstance(serviceRegistryImplementationType);
 			}
+		}
+
+		private static GeneralConfig GetGeneralConfig(IServiceProvider serviceProvider)
+		{
+			return serviceProvider.GetService<IConfigProvider<GeneralConfig>>().Config;
 		}
 	}
 }

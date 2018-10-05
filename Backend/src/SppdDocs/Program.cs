@@ -19,12 +19,12 @@ namespace SppdDocs
 			return WebHost.CreateDefaultBuilder(args)
 			              .ConfigureAppConfiguration((hostingContext, config) =>
 			              {
-				              config.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), Constants.Config.CONFIG_FOLDER));
+				              config.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), Constants.Config.APP_CONFIG_FOLDER));
 				              config.AddJsonFile("appsettings.json", false, false);
 			              })
 			              .ConfigureLogging((hostingContext, logging) =>
 			              {
-				              logging.AddLog4Net(Path.Combine(Constants.Config.CONFIG_FOLDER, Constants.Config.LOG4NET_CONFIG_FILE_NAME));
+				              logging.AddLog4Net(Path.Combine(Constants.Config.APP_CONFIG_FOLDER, Constants.Config.LOG4NET_CONFIG_FILE_NAME));
 			              })
 			              .UseStartup<Startup>();
 		}
