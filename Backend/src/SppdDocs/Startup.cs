@@ -94,7 +94,7 @@ namespace SppdDocs
 		private static void RegisterServiceRegistries(IServiceCollection services)
 		{
 			var serviceRegistries = GetRegistries<IStartupRegistrator>();
-			foreach (var serviceRegistry in serviceRegistries)
+			foreach (var serviceRegistry in serviceRegistries.OrderByDescending(s => s.Priority))
 			{
 				serviceRegistry.RegisterService(services);
 			}
@@ -103,7 +103,7 @@ namespace SppdDocs
 		private static void ConfigureServices(IServiceProvider appApplicationServices)
 		{
 			var dependencyRegistries = GetRegistries<IStartupRegistrator>();
-			foreach (var dependencyRegistry in dependencyRegistries)
+			foreach (var dependencyRegistry in dependencyRegistries.OrderByDescending(s => s.Priority))
 			{
 				dependencyRegistry.ConfigureService(appApplicationServices);
 			}

@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SppdDocs.Core;
 
@@ -16,11 +17,16 @@ namespace SppdDocs
 		public static IWebHostBuilder CreateWebHostBuilder(string[] args)
 		{
 			return WebHost.CreateDefaultBuilder(args)
-			              .UseStartup<Startup>()
+			              .ConfigureAppConfiguration((hostingContext, config) =>
+			              {
+				              config.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), Constants.Config.CONFIG_FOLDER));
+				              config.AddJsonFile("appsettings.json", false, false);
+			              })
 			              .ConfigureLogging((hostingContext, logging) =>
 			              {
 				              logging.AddLog4Net(Path.Combine(Constants.Config.CONFIG_FOLDER, Constants.Config.LOG4NET_CONFIG_FILE_NAME));
-			              });
+			              })
+			              .UseStartup<Startup>();
 		}
 	}
 }

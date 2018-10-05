@@ -17,4 +17,10 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>C:\Users\phwae\.nuget\packages\log4net\2.0.8\lib\netstandard1.3\log4net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

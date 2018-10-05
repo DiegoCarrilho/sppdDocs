@@ -11,6 +11,11 @@ namespace SppdDocs.Core
 	public interface IStartupRegistrator
 	{
 		/// <summary>
+		///     Gets the priority. <see cref="IStartupRegistrator" /> with a higher priority will be executed first/>
+		/// </summary>
+		int Priority { get; }
+
+		/// <summary>
 		///     Register services on the serviceCollection, when called.
 		/// </summary>
 		/// <param name="serviceCollection">The serviceCollection.</param>
