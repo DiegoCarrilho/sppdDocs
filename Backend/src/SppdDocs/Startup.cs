@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using SppdDocs.Core;
 using SppdDocs.Core.Utils.Extensions;
 using SppdDocs.Core.Utils.Helpers;
+using SppdDocs.Extensions;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace SppdDocs
@@ -77,6 +78,9 @@ namespace SppdDocs
 			// specifying the Swagger JSON endpoint.
 			app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"); });
 #endif
+
+			// Log all uncaught exceptions
+			app.UseGlobalExceptionHandler();
 
 			app.UseHttpsRedirection();
 			app.UseMvc();
