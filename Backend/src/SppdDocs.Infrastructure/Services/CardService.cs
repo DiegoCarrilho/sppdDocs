@@ -9,21 +9,22 @@ namespace SppdDocs.Infrastructure.Services
 {
 	internal class CardService : ICardService
 	{
-		private readonly IRepositoryVersioned<Card> _cardRepository;
+		private readonly ICardRepository _cardRepository;
 
-		public CardService(IRepositoryVersioned<Card> cardRepository)
+		public CardService(ICardRepository cardRepository)
 		{
 			_cardRepository = cardRepository;
 		}
 
 		public Card GetCurrent(Guid cardId)
 		{
-			return _cardRepository.GetCurrentByEntityId(cardId);
+			return _cardRepository.GetCardsFull()
+			                      .SingleOrDefault(card => card.EntityId == cardId);
 		}
 
 		public IEnumerable<Card> GetAllCurrent()
 		{
-			return _cardRepository.GetAllCurrent().ToList();
+			return _cardRepository.GetCardsFull().ToList();
 		}
 	}
 }

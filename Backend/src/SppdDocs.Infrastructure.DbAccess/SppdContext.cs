@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SppdDocs.Core.Domain.Entities;
 using SppdDocs.Infrastructure.DbAccess.EntityMetadataProviders;
 
@@ -10,27 +9,28 @@ namespace SppdDocs.Infrastructure.DbAccess
 	{
 		private readonly IEnumerable<IEntityMetadataProvider> _entityMetadataProviders;
 
-		public SppdContext(DbContextOptions<SppdContext> options, IEnumerable<IEntityMetadataProvider> entityMetadataProviders) : base(options)
+		public SppdContext(DbContextOptions<SppdContext> options, IEnumerable<IEntityMetadataProvider> entityMetadataProviders)
+			: base(options)
 		{
 			_entityMetadataProviders = entityMetadataProviders;
 		}
 
 		public DbSet<Card> Cards { get; set; }
+		public DbSet<Rarity> Rarity { get; set; }
+		public DbSet<CardClass> CardClass { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
-			builder.Entity<Card>(ConfigureCard);
+			builder.Entity<Rarity>();
+			builder.Entity<CardClass>();
+
+			builder.Entity<Card>();
 		}
 
 		public override int SaveChanges()
 		{
 			PrepareSaveChanges();
 			return base.SaveChanges();
-		}
-
-		private void ConfigureCard(EntityTypeBuilder<Card> builder)
-		{
-			// TODO: implement
 		}
 
 		private void PrepareSaveChanges()

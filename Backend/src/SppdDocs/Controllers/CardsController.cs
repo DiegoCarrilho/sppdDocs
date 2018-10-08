@@ -26,7 +26,7 @@ namespace SppdDocs.Controllers
 			return _mapper.Map<CardFullDto>(_cardService.GetCurrent(cardId));
 		}
 
-		[HttpGet]
+		[HttpGet("all")]
 		public IEnumerable<CardFullDto> GetAll()
 		{
 			return _mapper.Map<IEnumerable<CardFullDto>>(_cardService.GetAllCurrent());

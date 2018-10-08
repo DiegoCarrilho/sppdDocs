@@ -33,6 +33,8 @@ namespace SppdDocs.Infrastructure.DbAccess
 			services.AddScoped(typeof(IAsyncRepository<>), typeof(Repository<>));
 			services.AddScoped(typeof(IRepositoryVersioned<>), typeof(RepositoryVersioned<>));
 
+			services.AddScoped(typeof(ICardRepository), typeof(CardRepository));
+
 			// Other
 			services.AddScoped(typeof(IEntityMetadataProvider), typeof(BaseEntityMetadataProvider));
 
@@ -40,6 +42,8 @@ namespace SppdDocs.Infrastructure.DbAccess
 			if (databaseConfig.ManageDatabaseSchema)
 			{
 				services.AddScoped(typeof(IDbSeeder), typeof(CardDbSeeder));
+				services.AddScoped(typeof(IDbSeeder), typeof(RarityDbSeeder));
+				services.AddScoped(typeof(IDbSeeder), typeof(CardClassDbSeeder));
 			}
 		}
 

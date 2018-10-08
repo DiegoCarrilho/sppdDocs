@@ -9,7 +9,9 @@ namespace SppdDocs.MappingProfiles
 		{
 			CreateVersionedEntityToDtoMap<Card, CardFullDto>()
 				.ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
-				.ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
+				.ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+				.ForMember(dest => dest.RarityName, opt => opt.MapFrom(src => src.Rarity == null ? string.Empty : src.Rarity.Name))
+				.ForMember(dest => dest.ClassName, opt => opt.MapFrom(src => src.Class == null ? string.Empty : src.Class.Name));
 
 			CreateVersionedDtoToEntityMap<CardFullDto, Card>()
 				.ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
