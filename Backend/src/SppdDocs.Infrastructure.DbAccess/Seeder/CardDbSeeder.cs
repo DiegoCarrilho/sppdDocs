@@ -1,5 +1,6 @@
 ﻿using System;
 using SppdDocs.Core.Domain.Entities;
+using SppdDocs.Core.Domain.Objects;
 using SppdDocs.Core.Domain.Repositories;
 
 namespace SppdDocs.Infrastructure.DbAccess.Seeder
@@ -21,9 +22,10 @@ namespace SppdDocs.Infrastructure.DbAccess.Seeder
 			                    {
 				                    EntityId = new Guid(SeederConstants.Card.STAN_OF_MANY_MOONS_ENTITY_ID),
 				                    IsCurrent = true,
-				                    Name = "Stan of Many Moons",
+				                    Name = new LocalizedText("Stan of Many Moons"),
 				                    Description =
-					                    "Stan of many Moons is a 4-cost fighter from the Adventure theme who is available at rank 5 that deals damage to all enemy units on the battlefield with his effect.",
+					                    new LocalizedText(
+						                    "Stan of many Moons is a 4-cost fighter from the Adventure theme who is available at rank 5 that deals damage to all enemy units on the battlefield with his effect."),
 				                    RarityId = new Guid(SeederConstants.Rarity.LEGENDARY_ID),
 				                    ClassId = new Guid(SeederConstants.CardClass.FIGHTER_ID)
 			                    });

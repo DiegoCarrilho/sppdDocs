@@ -1,8 +1,10 @@
-﻿namespace SppdDocs.Core.Domain.Entities
+﻿using SppdDocs.Core.Domain.Objects;
+
+namespace SppdDocs.Core.Domain.Entities
 {
-	public class NamedEntity : VersionedEntity
+	public abstract class NamedEntity : VersionedEntity
 	{
-		public string Name { get; set; }
+		public LocalizedText Name { get; set; }
 
 		public byte[] Image { get; set; }
 	}

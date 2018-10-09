@@ -6,18 +6,13 @@ namespace SppdDocs.Core.Domain.Entities
 	{
 		protected VersionedEntity()
 		{
-			VersionId = Guid.NewGuid();
+			EntityId = Guid.NewGuid();
 		}
 
 		/// <summary>
 		///     Identifies the entity instance. This property holds the same value for all its versions
 		/// </summary>
 		public Guid EntityId { get; set; }
-
-		/// <summary>
-		///     Identifies the version.
-		/// </summary>
-		public Guid VersionId { get; set; }
 
 		/// <summary>
 		///     Specifies what changes have been made for this version

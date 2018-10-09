@@ -5,7 +5,7 @@ using SppdDocs.Infrastructure.DbAccess.EntityMetadataProviders;
 
 namespace SppdDocs.Infrastructure.DbAccess
 {
-	public class SppdContext : DbContext
+	public partial class SppdContext : DbContext
 	{
 		private readonly IEnumerable<IEntityMetadataProvider> _entityMetadataProviders;
 
@@ -15,22 +15,18 @@ namespace SppdDocs.Infrastructure.DbAccess
 			_entityMetadataProviders = entityMetadataProviders;
 		}
 
-		public DbSet<Card> Cards { get; set; }
-		public DbSet<Rarity> Rarity { get; set; }
-		public DbSet<CardClass> CardClass { get; set; }
-
-		protected override void OnModelCreating(ModelBuilder builder)
-		{
-			builder.Entity<Rarity>();
-			builder.Entity<CardClass>();
-
-			builder.Entity<Card>();
-		}
-
 		public override int SaveChanges()
 		{
 			PrepareSaveChanges();
 			return base.SaveChanges();
+		}
+
+		protected override void OnModelCreating(ModelBuilder builder)
+		{
+			builder.Entity<Rarity>(ConfigureNamedEntity);
+			builder.Entity<CardClass>(ConfigureNamedEntity);
+
+			builder.Entity<Card>(ConfigureCard);
 		}
 
 		private void PrepareSaveChanges()

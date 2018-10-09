@@ -1,10 +1,11 @@
 ﻿using System;
+using SppdDocs.Core.Domain.Objects;
 
 namespace SppdDocs.Core.Domain.Entities
 {
 	public class Card : NamedEntity
 	{
-		public string Description { get; set; }
+		public LocalizedText Description { get; set; }
 
 		public Guid RarityId { get; set; }
 

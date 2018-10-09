@@ -1,4 +1,4 @@
-﻿namespace SppdDocs.Infrastructure.DbAccess.Utils
+﻿namespace SppdDocs.Infrastructure.DbAccess.Utils.Helpers
 {
 	internal static class ImageHelper
 	{

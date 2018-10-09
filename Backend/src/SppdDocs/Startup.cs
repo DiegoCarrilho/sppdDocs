@@ -37,14 +37,14 @@ namespace SppdDocs
 			// 'Microsoft.Extensions.Logging.LoggerFactory' See: https://github.com/aspnet/Logging/issues/691
 			services.AddSingleton<ILoggerFactory>(sp => new LoggerFactory(sp.GetServices<ILoggerProvider>()));
 
-			RegisterServiceRegistries(services);
+			RegisterServicesOnStartupRegistries(services);
 
 			// The configs are only available after the services have been registered
 			var generalConfig = GetGeneralConfig(services.BuildServiceProvider());
 			if (generalConfig.EnableSwaggerUI)
 			{
 				// Make SwaggerUI available
-				services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info {Title = "My API", Version = "v1"}); });
+				services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info {Title = "SppdDocs API", Version = "v1"}); });
 			}
 
 			services.AddMvc()
@@ -76,7 +76,7 @@ namespace SppdDocs
 
 				// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
 				// specifying the Swagger JSON endpoint.
-				var swaggerEndpoint = "/swagger/v1/swagger.json";
+				const string swaggerEndpoint = "/swagger/v1/swagger.json";
 				app.UseSwaggerUI(c => { c.SwaggerEndpoint(swaggerEndpoint, "API V1"); });
 
 				s_logger.Info($"SwaggerUI has been enabled on '{swaggerEndpoint}'");
@@ -88,7 +88,7 @@ namespace SppdDocs
 			app.UseHttpsRedirection();
 			app.UseMvc();
 
-			ConfigureServices(app.ApplicationServices);
+			ConfigureServicesOnStartupRegistries(app.ApplicationServices);
 
 			s_logger.Info("Application is ready");
 		}
@@ -98,7 +98,7 @@ namespace SppdDocs
 		///     <see cref="IStartupRegistrator" />
 		/// </summary>
 		/// <param name="services">The service collection to register the services on.</param>
-		private static void RegisterServiceRegistries(IServiceCollection services)
+		private static void RegisterServicesOnStartupRegistries(IServiceCollection services)
 		{
 			var serviceRegistries = GetRegistries<IStartupRegistrator>();
 			foreach (var serviceRegistry in serviceRegistries.OrderByDescending(s => s.Priority))
@@ -107,7 +107,7 @@ namespace SppdDocs
 			}
 		}
 
-		private static void ConfigureServices(IServiceProvider appApplicationServices)
+		private static void ConfigureServicesOnStartupRegistries(IServiceProvider appApplicationServices)
 		{
 			var dependencyRegistries = GetRegistries<IStartupRegistrator>();
 			foreach (var dependencyRegistry in dependencyRegistries.OrderByDescending(s => s.Priority))
@@ -141,10 +141,10 @@ namespace SppdDocs
 		}
 
 		/// <summary>
-		///     Gets all the registries registries of type <c>TRegistry</c>.
+		///     Gets an instance of every concrete type, specified by <c>TRegistry</c>.
 		/// </summary>
 		/// <typeparam name="TRegistry">The type of registry</typeparam>
-		/// <returns>A list of instances for all found implementations of type <c>TRegistry</c></returns>
+		/// <returns>A list of instances for all concrete implementations of type <c>TRegistry</c></returns>
 		private static IEnumerable<TRegistry> GetRegistries<TRegistry>()
 		{
 			var serviceRegistryType = typeof(TRegistry);
@@ -158,6 +158,9 @@ namespace SppdDocs
 			}
 		}
 
+		/// <summary>
+		///     Gets the general configuration.
+		/// </summary>
 		private static GeneralConfig GetGeneralConfig(IServiceProvider serviceProvider)
 		{
 			return serviceProvider.GetService<IConfigProvider<GeneralConfig>>().Config;

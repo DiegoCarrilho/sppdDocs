@@ -29,7 +29,7 @@ namespace SppdDocs.Infrastructure.DbAccess.Repositories
 
 		public TEntity Get(Guid entityId, Guid versionId)
 		{
-			return Set.SingleOrDefault(entity => entity.EntityId == entityId && entity.VersionId == versionId);
+			return Set.SingleOrDefault(entity => entity.EntityId == entityId && entity.Id == versionId);
 		}
 	}
 }
