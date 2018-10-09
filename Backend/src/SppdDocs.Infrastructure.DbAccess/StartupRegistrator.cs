@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SppdDocs.Core;
 using SppdDocs.Core.Config;
-using SppdDocs.Core.Domain.Repositories;
+using SppdDocs.Core.Repositories;
 using SppdDocs.Infrastructure.DbAccess.Config;
 using SppdDocs.Infrastructure.DbAccess.EntityMetadataProviders;
 using SppdDocs.Infrastructure.DbAccess.Repositories;
-using SppdDocs.Infrastructure.DbAccess.Seeder;
+using SppdDocs.Infrastructure.DbAccess.Seeders;
 
 namespace SppdDocs.Infrastructure.DbAccess
 {

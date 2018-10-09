@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using SppdDocs.Core.Domain.Entities;
-using SppdDocs.Core.Domain.Specifications;
+using SppdDocs.Core.Specifications;
 
-namespace SppdDocs.Core.Domain.Repositories
+namespace SppdDocs.Core.Repositories
 {
 	public interface IRepository<TEntity> where TEntity : BaseEntity
 	{

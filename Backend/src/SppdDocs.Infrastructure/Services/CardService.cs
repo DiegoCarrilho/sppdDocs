@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using SppdDocs.Core.Domain.Entities;
-using SppdDocs.Core.Domain.Repositories;
+using SppdDocs.Core.Repositories;
 using SppdDocs.Core.Services;
 
 namespace SppdDocs.Infrastructure.Services

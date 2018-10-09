@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using SppdDocs.Core.Domain.Entities;
-using SppdDocs.Core.Domain.Repositories;
+using SppdDocs.Core.Repositories;
 
 namespace SppdDocs.Infrastructure.DbAccess.Repositories
 {

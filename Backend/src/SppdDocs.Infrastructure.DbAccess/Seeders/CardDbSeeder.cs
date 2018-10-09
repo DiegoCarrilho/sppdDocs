@@ -1,9 +1,9 @@
 ﻿using System;
 using SppdDocs.Core.Domain.Entities;
 using SppdDocs.Core.Domain.Objects;
-using SppdDocs.Core.Domain.Repositories;
+using SppdDocs.Core.Repositories;
 
-namespace SppdDocs.Infrastructure.DbAccess.Seeder
+namespace SppdDocs.Infrastructure.DbAccess.Seeders
 {
 	internal class CardDbSeeder : IDbSeeder
 	{

@@ -1,4 +1,4 @@
-﻿namespace SppdDocs.Infrastructure.DbAccess.Seeder
+﻿namespace SppdDocs.Infrastructure.DbAccess.Seeders
 {
 	internal static class SeederConstants
 	{

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using SppdDocs.Core.Domain.Entities;
 
-namespace SppdDocs.Core.Domain.Repositories
+namespace SppdDocs.Core.Repositories
 {
 	public interface ICardRepository : IRepositoryVersioned<Card>
 	{
