@@ -13,7 +13,10 @@ namespace SppdDocs.Infrastructure.DbAccess
 		private static void ConfigureBaseEntity<TEntity>(EntityTypeBuilder<TEntity> builder)
 			where TEntity : BaseEntity
 		{
-			builder.Property(e => e.CreatedOnUtc).IsRequired();
+			builder.Property(e => e.Id)
+			       .IsConcurrencyToken();
+			builder.Property(e => e.CreatedOnUtc)
+			       .IsRequired();
 		}
 
 		public static void ConfigureVersionedEntity<TEntity>(EntityTypeBuilder<TEntity> builder)
