@@ -19,6 +19,11 @@ namespace SppdDocs.Core.Domain.Entities
 		/// </summary>
 		public DateTime CreatedOnUtc { get; set; }
 
+		/// <summary>
+		///     Specifies when the entity instance has been last updated
+		/// </summary>
+		public DateTime UpdatedOnUtc { get; set; }
+
 		///// <summary>
 		/////     Specifies by whom the entity instance has been created
 		///// </summary>

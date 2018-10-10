@@ -11,7 +11,9 @@ namespace SppdDocs.MappingProfiles
 			where TDto : EntityDto
 		{
 			return CreateMap<TEntity, TDto>()
-				.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id));
+			       .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+			       .ForMember(dest => dest.CreatedOnUtc, opt => opt.MapFrom(src => src.CreatedOnUtc))
+			       .ForMember(dest => dest.UpdatedOnUtc, opt => opt.MapFrom(src => src.UpdatedOnUtc));
 		}
 
 		protected IMappingExpression<TDto, TEntity> CreateDtoToEntityMap<TDto, TEntity>()

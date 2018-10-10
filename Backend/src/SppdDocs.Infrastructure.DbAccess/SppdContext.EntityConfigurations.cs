@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SppdDocs.Core.Domain.Entities;
 
 namespace SppdDocs.Infrastructure.DbAccess
@@ -10,12 +11,20 @@ namespace SppdDocs.Infrastructure.DbAccess
 	/// <seealso cref="T:Microsoft.EntityFrameworkCore.DbContext" />
 	internal partial class SppdContext
 	{
+		private const string SQL_DATE_GETTER = "GETUTCDATE()";
+
 		private static void ConfigureBaseEntity<TEntity>(EntityTypeBuilder<TEntity> builder)
 			where TEntity : BaseEntity
 		{
-			builder.Property(e => e.Id)
-			       .IsConcurrencyToken();
+			builder.Property(e => e.Id);
 			builder.Property(e => e.CreatedOnUtc)
+			       .HasDefaultValueSql(SQL_DATE_GETTER)
+			       .ValueGeneratedOnAdd()
+			       .IsRequired();
+			builder.Property(e => e.UpdatedOnUtc)
+			       .HasDefaultValueSql(SQL_DATE_GETTER)
+			       .ValueGeneratedOnAddOrUpdate()
+			       .IsConcurrencyToken()
 			       .IsRequired();
 		}
 

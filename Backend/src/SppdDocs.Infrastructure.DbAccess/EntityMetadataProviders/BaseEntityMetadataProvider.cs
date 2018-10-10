@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using SppdDocs.Core.Domain.Entities;
 
 namespace SppdDocs.Infrastructure.DbAccess.EntityMetadataProviders
@@ -11,14 +9,7 @@ namespace SppdDocs.Infrastructure.DbAccess.EntityMetadataProviders
 
 		public override void SetModifierMetadataProperties(EntityEntry<BaseEntity> entry)
 		{
-			if (entry.State == EntityState.Added)
-			{
-				entry.Property(e => e.CreatedOnUtc).CurrentValue = DateTime.UtcNow;
-			}
-			else
-			{
-				entry.Property(e => e.CreatedOnUtc).IsModified = false;
-			}
+			// TODO: set properties (e.g. ApplicationUser) once implemented
 		}
 	}
 }
