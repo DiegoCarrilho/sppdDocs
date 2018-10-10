@@ -19,7 +19,7 @@ namespace SppdDocs.Infrastructure.Services
 		public Card GetCurrent(Guid cardId)
 		{
 			return _cardRepository.GetCardsFull()
-			                      .SingleOrDefault(card => card.EntityId == cardId);
+			                      .SingleOrDefault(card => card.Id == cardId);
 		}
 
 		public IEnumerable<Card> GetAllCurrent()

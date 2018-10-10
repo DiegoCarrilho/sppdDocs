@@ -14,7 +14,6 @@ using SppdDocs.Infrastructure.DbAccess.Seeders;
 
 namespace SppdDocs.Infrastructure.DbAccess
 {
-	// ReSharper disable once UnusedMember.Global
 	public class StartupRegistrator : IStartupRegistrator
 	{
 		private static readonly ILog s_logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -35,8 +34,9 @@ namespace SppdDocs.Infrastructure.DbAccess
 
 			services.AddScoped(typeof(ICardRepository), typeof(CardRepository));
 
-			// Other
+			// Entity metadata providers
 			services.AddScoped(typeof(IEntityMetadataProvider), typeof(BaseEntityMetadataProvider));
+			services.AddScoped(typeof(IEntityMetadataProvider), typeof(VersionedEntityMetadataProvider));
 
 			// DB Seeders
 			if (databaseConfig.ManageDatabaseSchema)
@@ -44,6 +44,8 @@ namespace SppdDocs.Infrastructure.DbAccess
 				services.AddScoped(typeof(IDbSeeder), typeof(CardDbSeeder));
 				services.AddScoped(typeof(IDbSeeder), typeof(RarityDbSeeder));
 				services.AddScoped(typeof(IDbSeeder), typeof(CardClassDbSeeder));
+				services.AddScoped(typeof(IDbSeeder), typeof(CardEffectDbSeeder));
+				services.AddScoped(typeof(IDbSeeder), typeof(CardStatusEffectDbSeeder));
 			}
 		}
 

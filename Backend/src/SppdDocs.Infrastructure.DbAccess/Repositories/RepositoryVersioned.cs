@@ -5,10 +5,11 @@ using SppdDocs.Core.Repositories;
 
 namespace SppdDocs.Infrastructure.DbAccess.Repositories
 {
-	public class RepositoryVersioned<TEntity> : Repository<TEntity>, IRepositoryVersioned<TEntity>
+	internal class RepositoryVersioned<TEntity> : Repository<TEntity>, IRepositoryVersioned<TEntity>
 		where TEntity : VersionedEntity
 	{
-		public RepositoryVersioned(SppdContext sppdContext) : base(sppdContext)
+		public RepositoryVersioned(SppdContext sppdContext)
+			: base(sppdContext)
 		{
 		}
 
@@ -19,17 +20,17 @@ namespace SppdDocs.Infrastructure.DbAccess.Repositories
 
 		public IQueryable<TEntity> GetHistory(Guid entityId)
 		{
-			return Set.Where(entity => entity.EntityId == entityId);
+			return Set.Where(entity => entity.CurrentId == entityId);
 		}
 
-		public TEntity GetCurrentByEntityId(Guid entityId)
+		public TEntity GetCurrent(Guid entityId)
 		{
-			return GetAllCurrent().SingleOrDefault(entity => entity.EntityId == entityId);
+			return GetAllCurrent().SingleOrDefault(entity => entity.CurrentId == entityId);
 		}
 
 		public TEntity Get(Guid entityId, Guid versionId)
 		{
-			return Set.SingleOrDefault(entity => entity.EntityId == entityId && entity.Id == versionId);
+			return Set.SingleOrDefault(entity => entity.CurrentId == entityId && entity.Id == versionId);
 		}
 	}
 }

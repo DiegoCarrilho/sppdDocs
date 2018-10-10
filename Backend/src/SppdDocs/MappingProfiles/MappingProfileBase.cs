@@ -30,7 +30,7 @@ namespace SppdDocs.MappingProfiles
 			       .ForMember(dest => dest.VersionId, opt => opt.MapFrom(src => src.Id))
 			       .ForMember(dest => dest.VersionComment, opt => opt.MapFrom(src => src.VersionComment))
 			       .ForMember(dest => dest.IsCurrent, opt => opt.MapFrom(src => src.IsCurrent))
-			       .ForMember(dest => dest.EntityId, opt => opt.MapFrom(src => src.EntityId));
+			       .ForMember(dest => dest.CurrentVersionId, opt => opt.MapFrom(src => src.CurrentId));
 		}
 
 		protected IMappingExpression<TDto, TEntity> CreateVersionedDtoToEntityMap<TDto, TEntity>()
@@ -41,7 +41,7 @@ namespace SppdDocs.MappingProfiles
 			       .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.VersionId))
 			       .ForMember(dest => dest.VersionComment, opt => opt.MapFrom(src => src.VersionComment))
 			       .ForMember(dest => dest.IsCurrent, opt => opt.MapFrom(src => src.IsCurrent))
-			       .ForMember(dest => dest.EntityId, opt => opt.MapFrom(src => src.EntityId));
+			       .ForMember(dest => dest.CurrentId, opt => opt.MapFrom(src => src.CurrentVersionId));
 		}
 	}
 }

@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using SppdDocs.Core.Domain.Entities;
 using SppdDocs.Infrastructure.DbAccess.EntityMetadataProviders;
 
 namespace SppdDocs.Infrastructure.DbAccess
 {
-	public partial class SppdContext : DbContext
+	internal partial class SppdContext : DbContext
 	{
 		private readonly IEnumerable<IEntityMetadataProvider> _entityMetadataProviders;
 
@@ -25,6 +26,8 @@ namespace SppdDocs.Infrastructure.DbAccess
 		{
 			builder.Entity<Rarity>(ConfigureNamedEntity);
 			builder.Entity<CardClass>(ConfigureNamedEntity);
+			builder.Entity<CardEffect>(ConfigureNamedEntity);
+			builder.Entity<CardStatusEffect>(ConfigureNamedEntity);
 
 			builder.Entity<Card>(ConfigureCard);
 		}
@@ -37,7 +40,7 @@ namespace SppdDocs.Infrastructure.DbAccess
 
 		private void SetModifierMetadataOnChangedEntities()
 		{
-			foreach (var entityMetadataProvider in _entityMetadataProviders)
+			foreach (var entityMetadataProvider in _entityMetadataProviders.OrderByDescending(m => m.Priority))
 			{
 				entityMetadataProvider.SetModifierMetadataOnChangedEntities(ChangeTracker);
 			}

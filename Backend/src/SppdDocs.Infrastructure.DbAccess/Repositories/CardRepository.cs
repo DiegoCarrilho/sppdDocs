@@ -5,7 +5,7 @@ using SppdDocs.Core.Repositories;
 
 namespace SppdDocs.Infrastructure.DbAccess.Repositories
 {
-	public class CardRepository : RepositoryVersioned<Card>, ICardRepository
+	internal class CardRepository : RepositoryVersioned<Card>, ICardRepository
 	{
 		public CardRepository(SppdContext sppdContext)
 			: base(sppdContext)
@@ -16,7 +16,9 @@ namespace SppdDocs.Infrastructure.DbAccess.Repositories
 		{
 			return GetAllCurrent()
 			       .Include(card => card.Rarity)
-			       .Include(card => card.Class);
+			       .Include(card => card.Class)
+			       .Include(card => card.Effect)
+			       .Include(card => card.StatusEffect);
 		}
 	}
 }

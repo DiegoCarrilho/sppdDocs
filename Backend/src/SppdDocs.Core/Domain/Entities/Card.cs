@@ -14,5 +14,13 @@ namespace SppdDocs.Core.Domain.Entities
 		public Guid ClassId { get; set; }
 
 		public CardClass Class { get; set; }
+
+		public Guid? EffectId { get; set; }
+
+		public CardEffect Effect { get; set; }
+
+		public Guid? StatusEffectId { get; set; }
+
+		public CardStatusEffect StatusEffect { get; set; }
 	}
 }

@@ -8,7 +8,7 @@ namespace SppdDocs.Infrastructure.DbAccess
 	///     Partial class containing the entity configurations
 	/// </summary>
 	/// <seealso cref="T:Microsoft.EntityFrameworkCore.DbContext" />
-	public partial class SppdContext
+	internal partial class SppdContext
 	{
 		private static void ConfigureBaseEntity<TEntity>(EntityTypeBuilder<TEntity> builder)
 			where TEntity : BaseEntity
@@ -21,12 +21,12 @@ namespace SppdDocs.Infrastructure.DbAccess
 		{
 			ConfigureBaseEntity(builder);
 
-			builder.HasIndex(e => e.IsCurrent);
-			builder.HasIndex(e => e.EntityId);
+			builder.HasIndex(e => e.CurrentId);
 
-			builder.HasIndex(e => new {e.EntityId, e.IsCurrent}).IsUnique();
+			builder.Property(e => e.CurrentId)
+			       .IsRequired();
 
-			builder.Property(e => e.EntityId).IsRequired();
+			builder.Ignore(e => e.IsCurrent);
 		}
 
 		private static void ConfigureNamedEntity<TEntity>(EntityTypeBuilder<TEntity> builder)
@@ -35,7 +35,8 @@ namespace SppdDocs.Infrastructure.DbAccess
 			ConfigureVersionedEntity(builder);
 
 			builder.OwnsOne(e => e.Name)
-			       .Property(name => name.En).IsRequired();
+			       .Property(name => name.En)
+			       .IsRequired();
 		}
 
 		private static void ConfigureCard<TEntity>(EntityTypeBuilder<TEntity> builder)
@@ -44,7 +45,8 @@ namespace SppdDocs.Infrastructure.DbAccess
 			ConfigureNamedEntity(builder);
 
 			builder.OwnsOne(card => card.Description)
-			       .Property(desc => desc.En).IsRequired();
+			       .Property(description => description.En)
+			       .IsRequired();
 		}
 	}
 }

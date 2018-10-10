@@ -1,38 +1,19 @@
 ﻿using System;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using SppdDocs.Core.Domain.Entities;
 
 namespace SppdDocs.Infrastructure.DbAccess.EntityMetadataProviders
 {
-	public class BaseEntityMetadataProvider : IEntityMetadataProvider
+	internal class BaseEntityMetadataProvider : EntityMetadataProviderBase<BaseEntity>
 	{
-		public void SetModifierMetadataOnChangedEntities(ChangeTracker changeTracker)
-		{
-			var entriesToSetModifier = changeTracker.Entries<BaseEntity>().Where(e => HasToSetModifierMetadata(e.State)).ToList();
+		public override int Priority => 100;
 
-			if (entriesToSetModifier.Any())
-			{
-				var saveDate = DateTime.UtcNow;
-
-				foreach (var entryToSetModifier in entriesToSetModifier)
-				{
-					SetModifierMetadataProperties(entryToSetModifier, saveDate);
-				}
-			}
-		}
-
-		private static bool HasToSetModifierMetadata(EntityState state)
-		{
-			return state == EntityState.Added || state == EntityState.Modified;
-		}
-
-		private static void SetModifierMetadataProperties(EntityEntry<BaseEntity> entry, DateTime saveDate)
+		public override void SetModifierMetadataProperties(EntityEntry<BaseEntity> entry)
 		{
 			if (entry.State == EntityState.Added)
 			{
-				entry.Property(e => e.CreatedOnUtc).CurrentValue = saveDate;
+				entry.Property(e => e.CreatedOnUtc).CurrentValue = DateTime.UtcNow;
 			}
 			else
 			{

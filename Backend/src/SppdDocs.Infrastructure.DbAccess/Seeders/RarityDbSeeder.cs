@@ -2,6 +2,7 @@
 using SppdDocs.Core.Domain.Entities;
 using SppdDocs.Core.Domain.Objects;
 using SppdDocs.Core.Repositories;
+using SppdDocs.Infrastructure.DbAccess.Utils.Extensions;
 using SppdDocs.Infrastructure.DbAccess.Utils.Helpers;
 
 namespace SppdDocs.Infrastructure.DbAccess.Seeders
@@ -24,25 +25,25 @@ namespace SppdDocs.Infrastructure.DbAccess.Seeders
 				                      Id = new Guid(SeederConstants.Rarity.COMMON_ID),
 				                      Name = new LocalizedText("Common"),
 				                      Image = ImageHelper.GetImageFromFilePath("")
-			                      });
+			                      }.SetDefaultSeederProperties());
 			_rarityRepository.Add(new Rarity
 			                      {
 				                      Id = new Guid(SeederConstants.Rarity.RARE_ID),
 				                      Name = new LocalizedText("Rare"),
 				                      Image = ImageHelper.GetImageFromFilePath("")
-			                      });
+			                      }.SetDefaultSeederProperties());
 			_rarityRepository.Add(new Rarity
 			                      {
 				                      Id = new Guid(SeederConstants.Rarity.EPIC_ID),
 				                      Name = new LocalizedText("Epic"),
 				                      Image = ImageHelper.GetImageFromFilePath("")
-			                      });
+			                      }.SetDefaultSeederProperties());
 			_rarityRepository.Add(new Rarity
 			                      {
 				                      Id = new Guid(SeederConstants.Rarity.LEGENDARY_ID),
 				                      Name = new LocalizedText("Legendary"),
 				                      Image = ImageHelper.GetImageFromFilePath("")
-			                      });
+			                      }.SetDefaultSeederProperties());
 		}
 	}
 }

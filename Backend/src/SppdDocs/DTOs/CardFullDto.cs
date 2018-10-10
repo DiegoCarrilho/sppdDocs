@@ -9,5 +9,9 @@
 		public string RarityName { get; set; }
 
 		public string ClassName { get; set; }
+
+		public string EffectName { get; set; }
+
+		public string StatusEffectName { get; set; }
 	}
 }

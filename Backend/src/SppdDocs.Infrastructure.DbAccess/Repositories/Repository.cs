@@ -13,7 +13,8 @@ namespace SppdDocs.Infrastructure.DbAccess.Repositories
 	///     https://blogs.msdn.microsoft.com/pfxteam/2012/04/13/should-i-expose-synchronous-wrappers-for-asynchronous-methods/
 	/// </summary>
 	/// <typeparam name="TEntity"></typeparam>
-	public class Repository<TEntity> : IRepository<TEntity>, IAsyncRepository<TEntity> where TEntity : BaseEntity
+	internal class Repository<TEntity> : IRepository<TEntity>, IAsyncRepository<TEntity>
+		where TEntity : BaseEntity
 	{
 		public Repository(SppdContext sppdContext)
 		{
