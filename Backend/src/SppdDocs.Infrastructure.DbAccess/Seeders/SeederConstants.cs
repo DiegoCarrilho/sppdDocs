@@ -44,5 +44,14 @@
 			public const string HEADHUNTER_ID = "C97F1DE7-ABA3-4AF9-A34A-583290946AF2";
 			public const string ENRAGED_ID = "A657D41E-4F0F-49A0-B4AF-22A224BAC882";
 		}
+
+		internal struct CardTheme
+		{
+			public const string ADVENTURE_ID = "4AF29C4A-282A-4FB8-8691-9D44398A97F2";
+			public const string SCIFI_ID = "5AA42BEE-0C1C-49E7-B402-CC58B19C0DDD";
+			public const string MYSTICAL_ID = "BF148B37-4E92-446F-9AB6-B80BF6BA7D05";
+			public const string FANTASY_ID = "2A0C0C38-97F1-4CD7-8072-89113FA738DA";
+			public const string NEUTRAL_ID = "EA08E01B-1418-43B7-B7D1-926FCAED2A66";
+		}
 	}
 }

@@ -28,6 +28,7 @@ namespace SppdDocs.Infrastructure.DbAccess
 			builder.Entity<CardClass>(ConfigureNamedEntity);
 			builder.Entity<CardEffect>(ConfigureNamedEntity);
 			builder.Entity<CardStatusEffect>(ConfigureNamedEntity);
+			builder.Entity<CardTheme>(ConfigureNamedEntity);
 
 			builder.Entity<Card>(ConfigureCard);
 		}

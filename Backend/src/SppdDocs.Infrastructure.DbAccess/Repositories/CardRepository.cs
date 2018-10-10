@@ -15,6 +15,7 @@ namespace SppdDocs.Infrastructure.DbAccess.Repositories
 		public IQueryable<Card> GetCardsFull()
 		{
 			return GetAllCurrent()
+			       .Include(card => card.Theme)
 			       .Include(card => card.Rarity)
 			       .Include(card => card.Class)
 			       .Include(card => card.Effect)

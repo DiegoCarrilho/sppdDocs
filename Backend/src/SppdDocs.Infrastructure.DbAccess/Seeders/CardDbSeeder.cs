@@ -26,6 +26,10 @@ namespace SppdDocs.Infrastructure.DbAccess.Seeders
 				                    Description =
 					                    new LocalizedText(
 						                    "Stan of many Moons is a 4-cost fighter from the Adventure theme who is available at rank 5 that deals damage to all enemy units on the battlefield with his effect."),
+				                    EnergyCost = 4,
+				                    Range = 0.6,
+				                    UnlockedAtRank = 5,
+				                    ThemeId = new Guid(SeederConstants.CardTheme.ADVENTURE_ID),
 				                    RarityId = new Guid(SeederConstants.Rarity.LEGENDARY_ID),
 				                    ClassId = new Guid(SeederConstants.CardClass.FIGHTER_ID),
 				                    EffectId = new Guid(SeederConstants.CardEffect.CHARGED_ID)
@@ -36,6 +40,9 @@ namespace SppdDocs.Infrastructure.DbAccess.Seeders
 				                    Name = new LocalizedText("Poison"),
 				                    Description = new LocalizedText(
 					                    "Poison is a 3 cost spell from the Sci-Fi theme who is available at rank 5 that poisons all enemies in a target area."),
+				                    EnergyCost = 3,
+				                    UnlockedAtRank = 5,
+				                    ThemeId = new Guid(SeederConstants.CardTheme.SCIFI_ID),
 				                    RarityId = new Guid(SeederConstants.Rarity.COMMON_ID),
 				                    ClassId = new Guid(SeederConstants.CardClass.SPELL_ID),
 				                    StatusEffectId = new Guid(SeederConstants.CardStatusEffect.POISON_ID)

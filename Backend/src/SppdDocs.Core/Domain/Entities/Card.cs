@@ -7,6 +7,16 @@ namespace SppdDocs.Core.Domain.Entities
 	{
 		public LocalizedText Description { get; set; }
 
+		public int EnergyCost { get; set; }
+
+		public double? Range { get; set; }
+
+		public int UnlockedAtRank { get; set; }
+
+		public Guid ThemeId { get; set; }
+
+		public CardTheme Theme { get; set; }
+
 		public Guid RarityId { get; set; }
 
 		public Rarity Rarity { get; set; }

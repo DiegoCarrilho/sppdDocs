@@ -46,6 +46,7 @@ namespace SppdDocs.Infrastructure.DbAccess
 				services.AddScoped(typeof(IDbSeeder), typeof(CardClassDbSeeder));
 				services.AddScoped(typeof(IDbSeeder), typeof(CardEffectDbSeeder));
 				services.AddScoped(typeof(IDbSeeder), typeof(CardStatusEffectDbSeeder));
+				services.AddScoped(typeof(IDbSeeder), typeof(CardThemeDbSeeder));
 			}
 		}
 
