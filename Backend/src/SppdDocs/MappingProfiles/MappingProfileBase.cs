@@ -27,10 +27,9 @@ namespace SppdDocs.MappingProfiles
 			where TDto : VersionedEntityDto
 		{
 			return CreateEntityToDtoMap<TEntity, TDto>()
-			       .ForMember(dest => dest.VersionId, opt => opt.MapFrom(src => src.Id))
 			       .ForMember(dest => dest.VersionComment, opt => opt.MapFrom(src => src.VersionComment))
 			       .ForMember(dest => dest.IsCurrent, opt => opt.MapFrom(src => src.IsCurrent))
-			       .ForMember(dest => dest.CurrentVersionId, opt => opt.MapFrom(src => src.CurrentId));
+			       .ForMember(dest => dest.CurrentId, opt => opt.MapFrom(src => src.CurrentId));
 		}
 
 		protected IMappingExpression<TDto, TEntity> CreateVersionedDtoToEntityMap<TDto, TEntity>()
@@ -38,10 +37,9 @@ namespace SppdDocs.MappingProfiles
 			where TEntity : VersionedEntity
 		{
 			return CreateDtoToEntityMap<TDto, TEntity>()
-			       .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.VersionId))
 			       .ForMember(dest => dest.VersionComment, opt => opt.MapFrom(src => src.VersionComment))
 			       .ForMember(dest => dest.IsCurrent, opt => opt.MapFrom(src => src.IsCurrent))
-			       .ForMember(dest => dest.CurrentId, opt => opt.MapFrom(src => src.CurrentVersionId));
+			       .ForMember(dest => dest.CurrentId, opt => opt.MapFrom(src => src.CurrentId));
 		}
 	}
 }
