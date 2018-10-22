@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SppdDocs.Core.Domain.Entities;
 using SppdDocs.Core.Specifications;
 
 namespace SppdDocs.Core.Repositories
 {
-	public interface IRepository<TEntity> where TEntity : BaseEntity
+	public interface IRepository<TEntity>
+		where TEntity : BaseEntity
 	{
-		TEntity GetById(int id);
+		TEntity GetById(Guid id);
 
 		TEntity GetSingleBySpec(ISpecification<TEntity> spec);
 

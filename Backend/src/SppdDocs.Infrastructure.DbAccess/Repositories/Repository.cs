@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -55,7 +56,7 @@ namespace SppdDocs.Infrastructure.DbAccess.Repositories
 			await SppdContext.SaveChangesAsync();
 		}
 
-		public virtual TEntity GetById(int id)
+		public virtual TEntity GetById(Guid id)
 		{
 			return SppdContext.Set<TEntity>().Find(id);
 		}

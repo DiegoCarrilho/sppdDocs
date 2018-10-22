@@ -39,7 +39,7 @@ namespace SppdDocs.Infrastructure.DbAccess
 			services.AddScoped(typeof(IEntityMetadataProvider), typeof(VersionedEntityMetadataProvider));
 
 			// DB Seeders
-			if (databaseConfig.ManageDatabaseSchema)
+			if (databaseConfig.ManageDatabase)
 			{
 				services.AddScoped(typeof(IDbSeeder), typeof(CardDbSeeder));
 				services.AddScoped(typeof(IDbSeeder), typeof(RarityDbSeeder));
@@ -47,6 +47,7 @@ namespace SppdDocs.Infrastructure.DbAccess
 				services.AddScoped(typeof(IDbSeeder), typeof(CardEffectDbSeeder));
 				services.AddScoped(typeof(IDbSeeder), typeof(CardStatusEffectDbSeeder));
 				services.AddScoped(typeof(IDbSeeder), typeof(CardThemeDbSeeder));
+				services.AddScoped(typeof(IDbSeeder), typeof(CardAttributeDbSeeder));
 			}
 		}
 
@@ -58,7 +59,7 @@ namespace SppdDocs.Infrastructure.DbAccess
 			{
 				var context = serviceScope.ServiceProvider.GetRequiredService<SppdContext>();
 
-				if (databaseConfig.ManageDatabaseSchema)
+				if (databaseConfig.ManageDatabase)
 				{
 					s_logger.Debug("Start recreating database");
 					if (context.Database.EnsureDeleted())

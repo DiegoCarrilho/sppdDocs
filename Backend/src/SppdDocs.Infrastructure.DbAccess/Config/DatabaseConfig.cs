@@ -16,7 +16,9 @@ namespace SppdDocs.Infrastructure.DbAccess.Config
 		/// <summary>
 		///     If set to true, the database will be recreated an seeded on every application start
 		/// </summary>
-		public bool ManageDatabaseSchema { get; set; }
+		public bool ManageDatabase { get; set; }
+
+		public string SqlUtcDateGetter { get; set; }
 
 		public string SectionKey => "Database";
 	}

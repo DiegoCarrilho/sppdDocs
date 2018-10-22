@@ -16,6 +16,14 @@
 			public const string LEGENDARY_ID = "D4A7E01F-C1BB-431C-8687-B4946345DB29";
 		}
 
+		internal struct CardAttribute
+		{
+			public const string CARD_UPGRADES_ID = "6C944F40-D079-41BF-B90B-4A24E0D29CF6";
+			public const string ATTACK_ID = "0862BC20-A9FD-4282-B3F6-07F79BDC3A98";
+			public const string HEALTH_ID = "7B8F8946-E5C3-4E66-9987-5BBE60732DDF";
+			public const string DAMAGE_ALL_ID = "250F742E-46C0-46D0-9D4B-BF9195962883";
+		}
+
 		internal struct CardClass
 		{
 			public const string FIGHTER_ID = "7C15DABB-FDDC-44B1-AC6A-6DE268A3DF00";
