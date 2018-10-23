@@ -7,24 +7,24 @@ using SppdDocs.Core.Services;
 
 namespace SppdDocs.Infrastructure.Services
 {
-	internal class CardService : ICardService
-	{
-		private readonly ICardRepository _cardRepository;
+    internal class CardService : ICardService
+    {
+        private readonly ICardRepository _cardRepository;
 
-		public CardService(ICardRepository cardRepository)
-		{
-			_cardRepository = cardRepository;
-		}
+        public CardService(ICardRepository cardRepository)
+        {
+            _cardRepository = cardRepository;
+        }
 
-		public Card GetCurrent(Guid cardId)
-		{
-			return _cardRepository.GetCardsFull()
-			                      .SingleOrDefault(card => card.Id == cardId);
-		}
+        public Card GetCurrent(Guid cardId)
+        {
+            return _cardRepository.GetCardsFull()
+                                  .SingleOrDefault(card => card.Id == cardId);
+        }
 
-		public IEnumerable<Card> GetAllCurrent()
-		{
-			return _cardRepository.GetCardsFull().ToList();
-		}
-	}
+        public IEnumerable<Card> GetAllCurrent()
+        {
+            return _cardRepository.GetCardsFull().ToList();
+        }
+    }
 }

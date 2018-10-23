@@ -4,74 +4,74 @@ using SppdDocs.Core.Domain.Entities;
 
 namespace SppdDocs.Infrastructure.DbAccess
 {
-	/// <inheritdoc />
-	/// <summary>
-	///     Partial class containing the entity configurations
-	/// </summary>
-	/// <seealso cref="T:Microsoft.EntityFrameworkCore.DbContext" />
-	internal partial class SppdContext
-	{
-		private void ConfigureBaseEntity<TEntity>(EntityTypeBuilder<TEntity> builder)
-			where TEntity : BaseEntity
-		{
-			builder.Property(e => e.Id);
-			builder.Property(e => e.CreatedOnUtc)
-			       .HasDefaultValueSql(_databaseConfig.Value.SqlUtcDateGetter)
-			       .ValueGeneratedOnAdd()
-			       .IsRequired();
-			builder.Property(e => e.UpdatedOnUtc)
-			       .HasDefaultValueSql(_databaseConfig.Value.SqlUtcDateGetter)
-			       .ValueGeneratedOnAddOrUpdate()
-			       .IsConcurrencyToken()
-			       .IsRequired();
-		}
+    /// <inheritdoc />
+    /// <summary>
+    ///     Partial class containing the entity configurations
+    /// </summary>
+    /// <seealso cref="T:Microsoft.EntityFrameworkCore.DbContext" />
+    internal partial class SppdContext
+    {
+        private void ConfigureBaseEntity<TEntity>(EntityTypeBuilder<TEntity> builder)
+            where TEntity : BaseEntity
+        {
+            builder.Property(e => e.Id);
+            builder.Property(e => e.CreatedOnUtc)
+                   .HasDefaultValueSql(_databaseConfig.Value.SqlUtcDateGetter)
+                   .ValueGeneratedOnAdd()
+                   .IsRequired();
+            builder.Property(e => e.UpdatedOnUtc)
+                   .HasDefaultValueSql(_databaseConfig.Value.SqlUtcDateGetter)
+                   .ValueGeneratedOnAddOrUpdate()
+                   .IsConcurrencyToken()
+                   .IsRequired();
+        }
 
-		public void ConfigureVersionedEntity<TEntity>(EntityTypeBuilder<TEntity> builder)
-			where TEntity : VersionedEntity
-		{
-			ConfigureBaseEntity(builder);
+        public void ConfigureVersionedEntity<TEntity>(EntityTypeBuilder<TEntity> builder)
+            where TEntity : VersionedEntity
+        {
+            ConfigureBaseEntity(builder);
 
-			builder.HasIndex(e => e.CurrentId);
+            builder.HasIndex(e => e.CurrentId);
 
-			builder.Property(e => e.CurrentId)
-			       .IsRequired();
+            builder.Property(e => e.CurrentId)
+                   .IsRequired();
 
-			builder.Ignore(e => e.IsCurrent);
-		}
+            builder.Ignore(e => e.IsCurrent);
+        }
 
-		private void ConfigureNamedEntity<TEntity>(EntityTypeBuilder<TEntity> builder)
-			where TEntity : NamedEntity
-		{
-			ConfigureVersionedEntity(builder);
+        private void ConfigureNamedEntity<TEntity>(EntityTypeBuilder<TEntity> builder)
+            where TEntity : NamedEntity
+        {
+            ConfigureVersionedEntity(builder);
 
-			builder.OwnsOne(e => e.Name)
-			       .Property(name => name.En)
-			       .IsRequired();
-		}
+            builder.OwnsOne(e => e.Name)
+                   .Property(name => name.En)
+                   .IsRequired();
+        }
 
-		private void ConfigureCard<TEntity>(EntityTypeBuilder<TEntity> builder)
-			where TEntity : Card
-		{
-			ConfigureNamedEntity(builder);
+        private void ConfigureCard<TEntity>(EntityTypeBuilder<TEntity> builder)
+            where TEntity : Card
+        {
+            ConfigureNamedEntity(builder);
 
-			builder.OwnsOne(card => card.DescriptionMarkdown)
-			       .Property(description => description.En)
-			       .IsRequired();
+            builder.OwnsOne(card => card.DescriptionMarkdown)
+                   .Property(description => description.En)
+                   .IsRequired();
 
-			builder.OwnsOne(card => card.DescriptionOnCard)
-			       .Property(description => description.En)
-			       .IsRequired();
+            builder.OwnsOne(card => card.DescriptionOnCard)
+                   .Property(description => description.En)
+                   .IsRequired();
 
-			builder.Ignore(card => card.UpgradeLevels);
-			builder.Ignore(card => card.CardAttributes);
-		}
+            builder.Ignore(card => card.UpgradeLevels);
+            builder.Ignore(card => card.CardAttributes);
+        }
 
-		private void ConfigureCardLevelUpgrade(EntityTypeBuilder<CardUpgrade> builder)
-		{
-			ConfigureBaseEntity(builder);
+        private void ConfigureCardLevelUpgrade(EntityTypeBuilder<CardUpgrade> builder)
+        {
+            ConfigureBaseEntity(builder);
 
-			builder.HasMany(c => c.CardAttributeUpgrades)
-			       .WithOne(c => c.CardUpgrade);
-		}
-	}
+            builder.HasMany(c => c.CardAttributeUpgrades)
+                   .WithOne(c => c.CardUpgrade);
+        }
+    }
 }

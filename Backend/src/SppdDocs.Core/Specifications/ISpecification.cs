@@ -4,12 +4,12 @@ using System.Linq.Expressions;
 
 namespace SppdDocs.Core.Specifications
 {
-	public interface ISpecification<T>
-	{
-		Expression<Func<T, bool>> Criteria { get; }
+    public interface ISpecification<T>
+    {
+        Expression<Func<T, bool>> Criteria { get; }
 
-		List<Expression<Func<T, object>>> Includes { get; }
+        List<Expression<Func<T, object>>> Includes { get; }
 
-		List<string> IncludeStrings { get; }
-	}
+        List<string> IncludeStrings { get; }
+    }
 }

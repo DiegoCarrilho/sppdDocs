@@ -1,6 +1,6 @@
 ﻿namespace SppdDocs.Core.Domain.Entities
 {
-	public class CardStatusEffect : NamedEntity
-	{
-	}
+    public class CardStatusEffect : NamedEntity
+    {
+    }
 }

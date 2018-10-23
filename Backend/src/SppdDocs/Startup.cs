@@ -19,151 +19,151 @@ using Swashbuckle.AspNetCore.Swagger;
 
 namespace SppdDocs
 {
-	public class Startup
-	{
-		private static readonly ILog s_logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+    public class Startup
+    {
+        private static readonly ILog s_logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-		// This method gets called by the runtime. Use this method to add services to the container.
-		public void ConfigureServices(IServiceCollection services)
-		{
-			s_logger.Debug("Start configuring services");
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            s_logger.Debug("Start configuring services");
 
-			LoadApplicationAssemblies();
+            LoadApplicationAssemblies();
 
-			// Use AutoMapper
-			services.AddAutoMapper();
+            // Use AutoMapper
+            services.AddAutoMapper();
 
-			// Workaround to fix exception 'Cannot choose between multiple constructors with equal length 2 on type
-			// 'Microsoft.Extensions.Logging.LoggerFactory' See: https://github.com/aspnet/Logging/issues/691
-			services.AddSingleton<ILoggerFactory>(sp => new LoggerFactory(sp.GetServices<ILoggerProvider>()));
+            // Workaround to fix exception 'Cannot choose between multiple constructors with equal length 2 on type
+            // 'Microsoft.Extensions.Logging.LoggerFactory' See: https://github.com/aspnet/Logging/issues/691
+            services.AddSingleton<ILoggerFactory>(sp => new LoggerFactory(sp.GetServices<ILoggerProvider>()));
 
-			RegisterServicesOnStartupRegistries(services);
+            RegisterServicesOnStartupRegistries(services);
 
-			// The configs are only available after the services have been registered
-			var generalConfig = GetGeneralConfig(services.BuildServiceProvider());
-			if (generalConfig.EnableSwaggerUI)
-			{
-				// Make SwaggerUI available
-				services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info {Title = "SppdDocs API", Version = "v1"}); });
-			}
+            // The configs are only available after the services have been registered
+            var generalConfig = GetGeneralConfig(services.BuildServiceProvider());
+            if (generalConfig.EnableSwaggerUI)
+            {
+                // Make SwaggerUI available
+                services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info {Title = "SppdDocs API", Version = "v1"}); });
+            }
 
-			services.AddMvc()
-			        .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc()
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-			s_logger.Info("Services have been configured");
-		}
+            s_logger.Info("Services have been configured");
+        }
 
-		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-		{
-			var generalConfig = GetGeneralConfig(app.ApplicationServices);
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            var generalConfig = GetGeneralConfig(app.ApplicationServices);
 
-			s_logger.Debug("Start configuring application");
+            s_logger.Debug("Start configuring application");
 
-			if (env.IsDevelopment())
-			{
-				app.UseDeveloperExceptionPage();
-			}
-			else
-			{
-				app.UseHsts();
-			}
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseHsts();
+            }
 
-			if (generalConfig.EnableSwaggerUI)
-			{
-				// Enable middleware to serve generated Swagger as a JSON endpoint.
-				app.UseSwagger();
+            if (generalConfig.EnableSwaggerUI)
+            {
+                // Enable middleware to serve generated Swagger as a JSON endpoint.
+                app.UseSwagger();
 
-				// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
-				// specifying the Swagger JSON endpoint.
-				const string swaggerEndpoint = "/swagger/v1/swagger.json";
-				app.UseSwaggerUI(c => { c.SwaggerEndpoint(swaggerEndpoint, "API V1"); });
+                // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+                // specifying the Swagger JSON endpoint.
+                const string swaggerEndpoint = "/swagger/v1/swagger.json";
+                app.UseSwaggerUI(c => { c.SwaggerEndpoint(swaggerEndpoint, "API V1"); });
 
-				s_logger.Info($"SwaggerUI has been enabled on '{swaggerEndpoint}'");
-			}
+                s_logger.Info($"SwaggerUI has been enabled on '{swaggerEndpoint}'");
+            }
 
-			// Log all uncaught exceptions
-			app.UseGlobalExceptionHandler();
+            // Log all uncaught exceptions
+            app.UseGlobalExceptionHandler();
 
-			app.UseHttpsRedirection();
-			app.UseMvc();
+            app.UseHttpsRedirection();
+            app.UseMvc();
 
-			ConfigureServicesOnStartupRegistries(app.ApplicationServices);
+            ConfigureServicesOnStartupRegistries(app.ApplicationServices);
 
-			s_logger.Info("Application is ready");
-		}
+            s_logger.Info("Application is ready");
+        }
 
-		/// <summary>
-		///     Calls <see cref="IStartupRegistrator.RegisterService" /> on all non-abstract implementations of
-		///     <see cref="IStartupRegistrator" />
-		/// </summary>
-		/// <param name="services">The service collection to register the services on.</param>
-		private static void RegisterServicesOnStartupRegistries(IServiceCollection services)
-		{
-			var serviceRegistries = GetRegistries<IStartupRegistrator>();
-			foreach (var serviceRegistry in serviceRegistries.OrderByDescending(s => s.Priority))
-			{
-				serviceRegistry.RegisterService(services);
-			}
-		}
+        /// <summary>
+        ///     Calls <see cref="IStartupRegistrator.RegisterService" /> on all non-abstract implementations of
+        ///     <see cref="IStartupRegistrator" />
+        /// </summary>
+        /// <param name="services">The service collection to register the services on.</param>
+        private static void RegisterServicesOnStartupRegistries(IServiceCollection services)
+        {
+            var serviceRegistries = GetRegistries<IStartupRegistrator>();
+            foreach (var serviceRegistry in serviceRegistries.OrderByDescending(s => s.Priority))
+            {
+                serviceRegistry.RegisterService(services);
+            }
+        }
 
-		private static void ConfigureServicesOnStartupRegistries(IServiceProvider appApplicationServices)
-		{
-			var dependencyRegistries = GetRegistries<IStartupRegistrator>();
-			foreach (var dependencyRegistry in dependencyRegistries.OrderByDescending(s => s.Priority))
-			{
-				dependencyRegistry.ConfigureService(appApplicationServices);
-			}
-		}
+        private static void ConfigureServicesOnStartupRegistries(IServiceProvider appApplicationServices)
+        {
+            var dependencyRegistries = GetRegistries<IStartupRegistrator>();
+            foreach (var dependencyRegistry in dependencyRegistries.OrderByDescending(s => s.Priority))
+            {
+                dependencyRegistry.ConfigureService(appApplicationServices);
+            }
+        }
 
-		/// <summary>
-		///     Loads the application assemblies (Sppd*.dll) found in the base directory.
-		/// </summary>
-		private static void LoadApplicationAssemblies()
-		{
-			s_logger.Debug("Start dynamic assembly loading");
+        /// <summary>
+        ///     Loads the application assemblies (Sppd*.dll) found in the base directory.
+        /// </summary>
+        private static void LoadApplicationAssemblies()
+        {
+            s_logger.Debug("Start dynamic assembly loading");
 
-			var directoryCatalog = new DirectoryCatalog(AppDomain.CurrentDomain.BaseDirectory, $"{Constants.Application.SHORT_NAME}*.dll");
-			var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies().Where(a => !a.IsDynamic).ToList();
-			foreach (var assemblyFilePath in directoryCatalog.LoadedFiles)
-			{
-				var cleanAssemblyFilePath = FileHelper.GetCleanFilePath(assemblyFilePath);
-				var isAssemblyRegistered = loadedAssemblies.Any(a => string.Equals(a.GetFilePath(), cleanAssemblyFilePath, StringComparison.InvariantCultureIgnoreCase));
-				if (!isAssemblyRegistered)
-				{
-					// Load the application assembly if it hasn't already been loaded
-					Assembly.Load(assemblyFilePath);
-					s_logger.Info($"Dynamically loaded assembly '{assemblyFilePath}'");
-				}
-			}
+            var directoryCatalog = new DirectoryCatalog(AppDomain.CurrentDomain.BaseDirectory, $"{Constants.Application.SHORT_NAME}*.dll");
+            var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies().Where(a => !a.IsDynamic).ToList();
+            foreach (var assemblyFilePath in directoryCatalog.LoadedFiles)
+            {
+                var cleanAssemblyFilePath = FileHelper.GetCleanFilePath(assemblyFilePath);
+                var isAssemblyRegistered = loadedAssemblies.Any(a => string.Equals(a.GetFilePath(), cleanAssemblyFilePath, StringComparison.InvariantCultureIgnoreCase));
+                if (!isAssemblyRegistered)
+                {
+                    // Load the application assembly if it hasn't already been loaded
+                    Assembly.Load(assemblyFilePath);
+                    s_logger.Info($"Dynamically loaded assembly '{assemblyFilePath}'");
+                }
+            }
 
-			s_logger.Info("Finished dynamically loading assemblies");
-		}
+            s_logger.Info("Finished dynamically loading assemblies");
+        }
 
-		/// <summary>
-		///     Gets an instance of every concrete type, specified by <c>TRegistry</c>.
-		/// </summary>
-		/// <typeparam name="TRegistry">The type of registry</typeparam>
-		/// <returns>A list of instances for all concrete implementations of type <c>TRegistry</c></returns>
-		private static IEnumerable<TRegistry> GetRegistries<TRegistry>()
-		{
-			var serviceRegistryType = typeof(TRegistry);
-			var serviceRegistryImplementationTypes = AppDomain.CurrentDomain.GetAssemblies()
-			                                                  .SelectMany(s => s.GetTypes())
-			                                                  .Where(p => p.IsClass && !p.IsAbstract && serviceRegistryType.IsAssignableFrom(p));
+        /// <summary>
+        ///     Gets an instance of every concrete type, specified by <c>TRegistry</c>.
+        /// </summary>
+        /// <typeparam name="TRegistry">The type of registry</typeparam>
+        /// <returns>A list of instances for all concrete implementations of type <c>TRegistry</c></returns>
+        private static IEnumerable<TRegistry> GetRegistries<TRegistry>()
+        {
+            var serviceRegistryType = typeof(TRegistry);
+            var serviceRegistryImplementationTypes = AppDomain.CurrentDomain.GetAssemblies()
+                                                              .SelectMany(s => s.GetTypes())
+                                                              .Where(p => p.IsClass && !p.IsAbstract && serviceRegistryType.IsAssignableFrom(p));
 
-			foreach (var serviceRegistryImplementationType in serviceRegistryImplementationTypes)
-			{
-				yield return (TRegistry) Activator.CreateInstance(serviceRegistryImplementationType);
-			}
-		}
+            foreach (var serviceRegistryImplementationType in serviceRegistryImplementationTypes)
+            {
+                yield return (TRegistry) Activator.CreateInstance(serviceRegistryImplementationType);
+            }
+        }
 
-		/// <summary>
-		///     Gets the general configuration.
-		/// </summary>
-		private static GeneralConfig GetGeneralConfig(IServiceProvider serviceProvider)
-		{
-			return serviceProvider.GetService<IConfigProvider<GeneralConfig>>().Config;
-		}
-	}
+        /// <summary>
+        ///     Gets the general configuration.
+        /// </summary>
+        private static GeneralConfig GetGeneralConfig(IServiceProvider serviceProvider)
+        {
+            return serviceProvider.GetService<IConfigProvider<GeneralConfig>>().Config;
+        }
+    }
 }

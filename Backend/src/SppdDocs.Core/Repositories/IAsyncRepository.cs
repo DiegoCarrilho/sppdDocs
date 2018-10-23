@@ -4,16 +4,16 @@ using SppdDocs.Core.Domain.Entities;
 
 namespace SppdDocs.Core.Repositories
 {
-	public interface IAsyncRepository<T> where T : BaseEntity
-	{
-		Task<T> GetByIdAsync(int id);
+    public interface IAsyncRepository<T> where T : BaseEntity
+    {
+        Task<T> GetByIdAsync(int id);
 
-		Task<List<T>> ListAllAsync();
+        Task<List<T>> ListAllAsync();
 
-		Task<T> AddAsync(T entity);
+        Task<T> AddAsync(T entity);
 
-		Task UpdateAsync(T entity);
+        Task UpdateAsync(T entity);
 
-		Task DeleteAsync(T entity);
-	}
+        Task DeleteAsync(T entity);
+    }
 }

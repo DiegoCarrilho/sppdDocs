@@ -8,18 +8,18 @@ using SppdDocs.Infrastructure.Services;
 
 namespace SppdDocs.Infrastructure
 {
-	public class StartupRegistrator : IStartupRegistrator
-	{
-		public int Priority => int.MaxValue;
+    public class StartupRegistrator : IStartupRegistrator
+    {
+        public int Priority => int.MaxValue;
 
-		public void RegisterService(IServiceCollection services)
-		{
-			services.AddScoped<ICardService, CardService>();
-			services.AddSingleton(typeof(IConfigProvider<>), typeof(ConfigProvider<>));
-		}
+        public void RegisterService(IServiceCollection services)
+        {
+            services.AddScoped<ICardService, CardService>();
+            services.AddSingleton(typeof(IConfigProvider<>), typeof(ConfigProvider<>));
+        }
 
-		public void ConfigureService(IServiceProvider serviceProvider)
-		{
-		}
-	}
+        public void ConfigureService(IServiceProvider serviceProvider)
+        {
+        }
+    }
 }

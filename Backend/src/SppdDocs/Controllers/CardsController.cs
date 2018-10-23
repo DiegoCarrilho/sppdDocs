@@ -7,29 +7,29 @@ using SppdDocs.DTOs;
 
 namespace SppdDocs.Controllers
 {
-	[Route("api/[controller]")]
-	[ApiController]
-	public class CardsController
-	{
-		private readonly ICardService _cardService;
-		private readonly IMapper _mapper;
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CardsController
+    {
+        private readonly ICardService _cardService;
+        private readonly IMapper _mapper;
 
-		public CardsController(ICardService cardService, IMapper mapper)
-		{
-			_cardService = cardService;
-			_mapper = mapper;
-		}
+        public CardsController(ICardService cardService, IMapper mapper)
+        {
+            _cardService = cardService;
+            _mapper = mapper;
+        }
 
-		[HttpGet("{cardId}")]
-		public ActionResult<CardFullDto> Get(Guid cardId)
-		{
-			return _mapper.Map<CardFullDto>(_cardService.GetCurrent(cardId));
-		}
+        [HttpGet("{cardId}")]
+        public ActionResult<CardFullDto> Get(Guid cardId)
+        {
+            return _mapper.Map<CardFullDto>(_cardService.GetCurrent(cardId));
+        }
 
-		[HttpGet("all")]
-		public IEnumerable<CardFullDto> GetAll()
-		{
-			return _mapper.Map<IEnumerable<CardFullDto>>(_cardService.GetAllCurrent());
-		}
-	}
+        [HttpGet("all")]
+        public IEnumerable<CardFullDto> GetAll()
+        {
+            return _mapper.Map<IEnumerable<CardFullDto>>(_cardService.GetAllCurrent());
+        }
+    }
 }
