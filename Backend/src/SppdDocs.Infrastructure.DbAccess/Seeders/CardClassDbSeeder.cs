@@ -16,7 +16,7 @@ namespace SppdDocs.Infrastructure.DbAccess.Seeders
 			_cardClassRepository = cardClassRepository;
 		}
 
-		public int Priority => 90;
+		public int Priority => SeederConstants.DbSeederPriority.BASE_DATA;
 
 		public void Seed()
 		{

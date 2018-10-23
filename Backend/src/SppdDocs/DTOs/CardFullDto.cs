@@ -29,6 +29,20 @@ namespace SppdDocs.DTOs
 
 		public string StatusEffectName { get; set; }
 
+		public string CastAreaName { get; set; }
+
+		public double? MaxVelocity { get; set; }
+
+		public double? TimeToReachMaxVelocitySec { get; set; }
+
+		public double? AgroRangeMultiplier { get; set; }
+
+		public double? AttackRange { get; set; }
+
+		public double? PreAttackDelay { get; set; }
+
+		public double? TimeInBetweenAttacksSec { get; set; }
+
 		public IEnumerable<NamedDto> CardAttributes
 		{
 			get => _attributes ?? (_attributes = new List<NamedDto>());

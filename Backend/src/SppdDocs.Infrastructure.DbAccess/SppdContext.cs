@@ -11,10 +11,11 @@ namespace SppdDocs.Infrastructure.DbAccess
 {
 	internal partial class SppdContext : DbContext
 	{
-		private readonly IEnumerable<IEntityMetadataProvider> _entityMetadataProviders;
 		private readonly Lazy<DatabaseConfig> _databaseConfig;
+		private readonly IEnumerable<IEntityMetadataProvider> _entityMetadataProviders;
 
-		public SppdContext(DbContextOptions<SppdContext> options, IEnumerable<IEntityMetadataProvider> entityMetadataProviders, IConfigProvider<DatabaseConfig> databaseConfigProvider)
+		public SppdContext(DbContextOptions<SppdContext> options, IEnumerable<IEntityMetadataProvider> entityMetadataProviders,
+			IConfigProvider<DatabaseConfig> databaseConfigProvider)
 			: base(options)
 		{
 			_entityMetadataProviders = entityMetadataProviders;
@@ -34,6 +35,7 @@ namespace SppdDocs.Infrastructure.DbAccess
 			builder.Entity<CardEffect>(ConfigureNamedEntity);
 			builder.Entity<CardStatusEffect>(ConfigureNamedEntity);
 			builder.Entity<CardTheme>(ConfigureNamedEntity);
+			builder.Entity<CardCastArea>(ConfigureNamedEntity);
 
 			builder.Entity<CardAttribute>(ConfigureNamedEntity);
 			builder.Entity<CardUpgrade>(ConfigureCardLevelUpgrade);

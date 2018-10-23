@@ -2,6 +2,12 @@
 {
 	internal static class SeederConstants
 	{
+		internal struct DbSeederPriority
+		{
+			public const int BASE_DATA = 90;
+			public const int CARD_DATA = 100;
+		}
+
 		internal struct Card
 		{
 			public const string STAN_OF_MANY_MOONS_ID = "790992AD-D8CE-4ECB-B552-B4BDA5BCDD75";
@@ -60,6 +66,12 @@
 			public const string MYSTICAL_ID = "BF148B37-4E92-446F-9AB6-B80BF6BA7D05";
 			public const string FANTASY_ID = "2A0C0C38-97F1-4CD7-8072-89113FA738DA";
 			public const string NEUTRAL_ID = "EA08E01B-1418-43B7-B7D1-926FCAED2A66";
+		}
+
+		internal struct CardCastArea
+		{
+			public const string OWN_SIDE_ID = "E7CCBCBD-024C-4EF0-9126-4F5E62E83A5F";
+			public const string ANYWHERE_ID = "EC0470AC-14CC-4B1D-8E88-62BD5A3993A8";
 		}
 	}
 }

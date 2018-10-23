@@ -39,6 +39,22 @@ namespace SppdDocs.Core.Domain.Entities
 
 		public CardStatusEffect StatusEffect { get; set; }
 
+		public Guid CastAreaId { get; set; }
+
+		public CardCastArea CastArea { get; set; }
+
+		public double? MaxVelocity { get; set; }
+
+		public double? TimeToReachMaxVelocitySec { get; set; }
+
+		public double? AgroRangeMultiplier { get; set; }
+
+		public double? AttackRange { get; set; }
+
+		public double? PreAttackDelay { get; set; }
+
+		public double? TimeInBetweenAttacksSec { get; set; }
+
 		public IEnumerable<CardUpgrade> CardUpgrades
 		{
 			get => _cardUpgrades ?? (_cardUpgrades = new List<CardUpgrade>());
@@ -63,27 +79,27 @@ namespace SppdDocs.Core.Domain.Entities
 				{
 					for (var i = CardUpgrades.Min(lu => lu.UpgradeTo); i < CardUpgrades.Max(lu => lu.UpgradeTo) + 1; i++)
 					{
-						yield return GetCardLevel(i);
+						yield return GetCardUpgradeLevel(i);
 					}
 				}
 			}
 		}
 
 		/// <summary>
-		///     Gets the card level for the specified level.
+		///     Gets the card level for the specified internal card upgrade level.
 		/// </summary>
-		public CardUpgradeLevelInfo GetCardLevel(int level)
+		public CardUpgradeLevelInfo GetCardUpgradeLevel(int cardUpgradeLevelInternal)
 		{
 			return new CardUpgradeLevelInfo
 			       {
-				       InternalUpgradeLevel = level,
-				       AttributeValues = CardUpgrades.Where(l => l.UpgradeFrom < level)
+				       InternalUpgradeLevel = cardUpgradeLevelInternal,
+				       AttributeValues = CardUpgrades.Where(l => l.UpgradeFrom < cardUpgradeLevelInternal)
 				                                     .SelectMany(l => l.CardAttributeUpgrades)
 				                                     .GroupBy(v => v.CardAttribute)
 				                                     .Select(g => new {CardAttribute = g.Key, LevelValue = g.Sum(v => v.Value)})
 				                                     .OrderBy(o => o.CardAttribute.SortIndex)
 				                                     .ToDictionary(o => o.CardAttribute, o => o.LevelValue),
-				       AttributeUpgrades = CardUpgrades.SingleOrDefault(l => l.UpgradeFrom == level)?
+				       AttributeUpgrades = CardUpgrades.SingleOrDefault(l => l.UpgradeFrom == cardUpgradeLevelInternal)?
 				                                       .CardAttributeUpgrades
 				                                       .ToDictionary(t => t.CardAttribute, t => t.Value)
 			       };

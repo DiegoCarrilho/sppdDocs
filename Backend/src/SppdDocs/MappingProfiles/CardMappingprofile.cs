@@ -20,6 +20,13 @@ namespace SppdDocs.MappingProfiles
 				.ForMember(dest => dest.ClassName, opt => opt.MapFrom(src => src.Class.Name.En))
 				.ForMember(dest => dest.EffectName, opt => opt.MapFrom(src => src.EffectId.HasValue ? src.Effect.Name.En : null))
 				.ForMember(dest => dest.StatusEffectName, opt => opt.MapFrom(src => src.StatusEffectId.HasValue ? src.StatusEffect.Name.En : null))
+				.ForMember(dest => dest.CastAreaName, opt => opt.MapFrom(src => src.CastArea.Name.En))
+				.ForMember(dest => dest.MaxVelocity, opt => opt.MapFrom(src => src.MaxVelocity))
+				.ForMember(dest => dest.TimeToReachMaxVelocitySec, opt => opt.MapFrom(src => src.TimeToReachMaxVelocitySec))
+				.ForMember(dest => dest.AgroRangeMultiplier, opt => opt.MapFrom(src => src.AgroRangeMultiplier))
+				.ForMember(dest => dest.AttackRange, opt => opt.MapFrom(src => src.AttackRange))
+				.ForMember(dest => dest.PreAttackDelay, opt => opt.MapFrom(src => src.PreAttackDelay))
+				.ForMember(dest => dest.TimeInBetweenAttacksSec, opt => opt.MapFrom(src => src.TimeInBetweenAttacksSec))
 				.ForMember(dest => dest.CardUpgrades, opt => opt.MapFrom(src => src.UpgradeLevels))
 				.ForMember(dest => dest.CardAttributes, opt => opt.MapFrom(src => src.CardAttributes));
 		}

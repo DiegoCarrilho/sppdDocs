@@ -20,6 +20,7 @@ namespace SppdDocs.Infrastructure.DbAccess.Repositories
 			       .Include(card => card.Class)
 			       .Include(card => card.Effect)
 			       .Include(card => card.StatusEffect)
+			       .Include(card => card.CastArea)
 			       .Include(card => card.CardUpgrades)
 			       .ThenInclude(clu => clu.CardAttributeUpgrades)
 			       .ThenInclude(av => av.CardAttribute);
