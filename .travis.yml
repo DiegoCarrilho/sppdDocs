@@ -1,4 +1,7 @@
 language: csharp
 solution: ./Backend/SppdDocs.sln
 mono: none
-dotnet: 2.1.5
+dotnet: 2.1.403
+
+script:
+ - dotnet restore
