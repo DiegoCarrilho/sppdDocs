@@ -14,7 +14,6 @@ namespace SppdDocs.Infrastructure.DbAccess
         private void ConfigureBaseEntity<TEntity>(EntityTypeBuilder<TEntity> builder)
             where TEntity : BaseEntity
         {
-            builder.Property(e => e.Id);
             builder.Property(e => e.CreatedOnUtc)
                    .HasDefaultValueSql(_databaseConfig.Value.SqlUtcDateGetter)
                    .ValueGeneratedOnAdd()
