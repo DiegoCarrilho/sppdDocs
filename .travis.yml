@@ -3,8 +3,7 @@ solution: ./Backend/SppdDocs.sln
 mono: none
 dotnet: 2.1.403
 
-install:
-- dotnet restore
-
 script:
+- cd Backend
+- dotnet restore
 - dotnet build
