@@ -62,25 +62,27 @@ namespace SppdDocs.Core.Domain.Entities
         }
 
         /// <summary>
-        ///     Gets all abilities configured for this <see cref="Card" /> sorted by <see cref="CardAttribute.SortIndex" />.
+        ///     Gets all card attributes configured for this <see cref="Card" /> sorted by <see cref="CardAttribute.SortIndex" />.
         /// </summary>
-        public IEnumerable<CardAttribute> CardAttributes => CardUpgrades.SelectMany(lu => lu.CardAttributeUpgrades.Select(au => au.CardAttribute))
-                                                                        .Distinct()
-                                                                        .OrderBy(a => a.SortIndex);
+        public IEnumerable<CardAttribute> GetCardAttributes()
+        {
+            return CardUpgrades.SelectMany(lu => lu.CardAttributeUpgrades.Select(au => au.CardAttribute))
+                               .Distinct()
+                               .OrderBy(a => a.SortIndex);
+        }
 
         /// <summary>
         ///     Gets all upgrade levels for this <see cref="Card" />.
         /// </summary>
-        public IEnumerable<CardUpgradeLevelInfo> UpgradeLevels
+        public IEnumerable<CardUpgradeLevelInfo> GetUpgradeLevels()
         {
-            get
+            if (CardUpgrades.Any())
             {
-                if (CardUpgrades.Any())
+                for (var cardUpgradeLevelInternal = CardUpgrades.Min(lu => lu.UpgradeTo);
+                    cardUpgradeLevelInternal < CardUpgrades.Max(lu => lu.UpgradeTo) + 1;
+                    cardUpgradeLevelInternal++)
                 {
-                    for (var i = CardUpgrades.Min(lu => lu.UpgradeTo); i < CardUpgrades.Max(lu => lu.UpgradeTo) + 1; i++)
-                    {
-                        yield return GetCardUpgradeLevel(i);
-                    }
+                    yield return GetCardUpgradeLevel(cardUpgradeLevelInternal);
                 }
             }
         }
@@ -99,10 +101,10 @@ namespace SppdDocs.Core.Domain.Entities
                                                      .Select(g => new {CardAttribute = g.Key, LevelValue = g.Sum(v => v.Value)})
                                                      .OrderBy(o => o.CardAttribute.SortIndex)
                                                      .ToDictionary(o => o.CardAttribute, o => o.LevelValue),
-                       AttributeUpgrades = CardUpgrades.SingleOrDefault(l => l.UpgradeFrom == cardUpgradeLevelInternal)?
+                AttributeUpgrades = CardUpgrades.SingleOrDefault(l => l.UpgradeFrom == cardUpgradeLevelInternal)?
                                                        .CardAttributeUpgrades
                                                        .ToDictionary(t => t.CardAttribute, t => t.Value)
-                   };
+            };
         }
     }
 }

@@ -60,9 +60,6 @@ namespace SppdDocs.Infrastructure.DbAccess
             builder.OwnsOne(card => card.DescriptionOnCard)
                    .Property(description => description.En)
                    .IsRequired();
-
-            builder.Ignore(card => card.UpgradeLevels);
-            builder.Ignore(card => card.CardAttributes);
         }
 
         private void ConfigureCardLevelUpgrade(EntityTypeBuilder<CardUpgrade> builder)

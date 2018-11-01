@@ -7,3 +7,4 @@ script:
 - cd Backend
 - dotnet restore
 - dotnet build
+- dotnet test tests/SppdDocs.Core.Tests.Unit/SppdDocs.Core.Tests.Unit.csproj

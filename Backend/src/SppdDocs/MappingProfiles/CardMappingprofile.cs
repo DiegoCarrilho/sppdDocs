@@ -27,8 +27,8 @@ namespace SppdDocs.MappingProfiles
                 .ForMember(dest => dest.AttackRange, opt => opt.MapFrom(src => src.AttackRange))
                 .ForMember(dest => dest.PreAttackDelay, opt => opt.MapFrom(src => src.PreAttackDelay))
                 .ForMember(dest => dest.TimeInBetweenAttacksSec, opt => opt.MapFrom(src => src.TimeInBetweenAttacksSec))
-                .ForMember(dest => dest.CardUpgrades, opt => opt.MapFrom(src => src.UpgradeLevels))
-                .ForMember(dest => dest.CardAttributes, opt => opt.MapFrom(src => src.CardAttributes));
+                .ForMember(dest => dest.CardUpgrades, opt => opt.MapFrom(src => src.GetUpgradeLevels()))
+                .ForMember(dest => dest.CardAttributes, opt => opt.MapFrom(src => src.GetCardAttributes()));
         }
     }
 }
