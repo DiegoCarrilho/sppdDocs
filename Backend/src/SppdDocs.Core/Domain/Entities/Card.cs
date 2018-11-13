@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using SppdDocs.Core.Domain.Objects;
 
 namespace SppdDocs.Core.Domain.Entities
@@ -72,22 +73,6 @@ namespace SppdDocs.Core.Domain.Entities
         }
 
         /// <summary>
-        ///     Gets all upgrade levels for this <see cref="Card" />.
-        /// </summary>
-        public IEnumerable<CardUpgradeLevelInfo> GetUpgradeLevels()
-        {
-            if (CardUpgrades.Any())
-            {
-                for (var cardUpgradeLevelInternal = CardUpgrades.Min(lu => lu.UpgradeTo);
-                    cardUpgradeLevelInternal < CardUpgrades.Max(lu => lu.UpgradeTo) + 1;
-                    cardUpgradeLevelInternal++)
-                {
-                    yield return GetCardUpgradeLevel(cardUpgradeLevelInternal);
-                }
-            }
-        }
-
-        /// <summary>
         ///     Gets the card level for the specified internal card upgrade level.
         /// </summary>
         public CardUpgradeLevelInfo GetCardUpgradeLevel(int cardUpgradeLevelInternal)
@@ -101,10 +86,26 @@ namespace SppdDocs.Core.Domain.Entities
                                                      .Select(g => new {CardAttribute = g.Key, LevelValue = g.Sum(v => v.Value)})
                                                      .OrderBy(o => o.CardAttribute.SortIndex)
                                                      .ToDictionary(o => o.CardAttribute, o => o.LevelValue),
-                AttributeUpgrades = CardUpgrades.SingleOrDefault(l => l.UpgradeFrom == cardUpgradeLevelInternal)?
+                       AttributeUpgrades = CardUpgrades.SingleOrDefault(l => l.UpgradeFrom == cardUpgradeLevelInternal)?
                                                        .CardAttributeUpgrades
                                                        .ToDictionary(t => t.CardAttribute, t => t.Value)
-            };
+                   };
+        }
+
+        /// <summary>
+        ///     Gets all upgrade levels for this <see cref="Card" />.
+        /// </summary>
+        public IEnumerable<CardUpgradeLevelInfo> GetUpgradeLevels()
+        {
+            if (CardUpgrades.Any())
+            {
+                for (var cardUpgradeLevelInternal = CardUpgrades.Min(lu => lu.UpgradeTo);
+                    cardUpgradeLevelInternal < CardUpgrades.Max(lu => lu.UpgradeTo) + 1;
+                    cardUpgradeLevelInternal++)
+                {
+                    yield return GetCardUpgradeLevel(cardUpgradeLevelInternal);
+                }
+            }
         }
     }
 }

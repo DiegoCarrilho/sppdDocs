@@ -4,11 +4,6 @@ namespace SppdDocs.Core.Domain.Entities
 {
     public abstract class BaseEntity
     {
-        protected BaseEntity()
-        {
-            Id = Guid.NewGuid();
-        }
-
         /// <summary>
         ///     Unique identifier identifying a single instance of an entity
         /// </summary>
@@ -23,6 +18,11 @@ namespace SppdDocs.Core.Domain.Entities
         ///     Specifies when the entity instance has been last updated
         /// </summary>
         public DateTime UpdatedOnUtc { get; set; }
+
+        protected BaseEntity()
+        {
+            Id = Guid.NewGuid();
+        }
 
         ///// <summary>
         /////     Specifies by whom the entity instance has been created

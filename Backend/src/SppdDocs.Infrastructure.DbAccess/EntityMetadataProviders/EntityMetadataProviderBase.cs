@@ -1,6 +1,8 @@
 ﻿using System.Linq;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+
 using SppdDocs.Core.Domain.Entities;
 
 namespace SppdDocs.Infrastructure.DbAccess.EntityMetadataProviders
@@ -23,11 +25,11 @@ namespace SppdDocs.Infrastructure.DbAccess.EntityMetadataProviders
             }
         }
 
+        public abstract void SetModifierMetadataProperties(EntityEntry<TEntity> entry);
+
         protected virtual bool HasToSetModifierMetadata(EntityState state)
         {
             return state == EntityState.Added || state == EntityState.Modified;
         }
-
-        public abstract void SetModifierMetadataProperties(EntityEntry<TEntity> entry);
     }
 }

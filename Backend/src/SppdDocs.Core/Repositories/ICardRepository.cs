@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+
 using SppdDocs.Core.Domain.Entities;
 
 namespace SppdDocs.Core.Repositories

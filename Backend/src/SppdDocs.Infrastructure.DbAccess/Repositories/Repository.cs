@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+
 using Microsoft.EntityFrameworkCore;
+
 using SppdDocs.Core.Domain.Entities;
 using SppdDocs.Core.Repositories;
 
@@ -9,14 +11,14 @@ namespace SppdDocs.Infrastructure.DbAccess.Repositories
     internal class Repository<TEntity> : IRepository<TEntity>
         where TEntity : BaseEntity
     {
+        protected DbSet<TEntity> Set => SppdContext.Set<TEntity>();
+
+        protected SppdContext SppdContext { get; }
+
         public Repository(SppdContext sppdContext)
         {
             SppdContext = sppdContext;
         }
-
-        protected DbSet<TEntity> Set => SppdContext.Set<TEntity>();
-
-        protected SppdContext SppdContext { get; }
 
         public virtual async Task<TEntity> GetAsync(Guid id)
         {

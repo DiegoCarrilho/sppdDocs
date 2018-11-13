@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 using Microsoft.EntityFrameworkCore;
+
 using SppdDocs.Core.Domain.Entities;
 using SppdDocs.Core.Repositories;
 

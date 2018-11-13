@@ -1,9 +1,9 @@
 ﻿using System;
+
 using SppdDocs.Core.Domain.Entities;
 using SppdDocs.Core.Domain.Objects;
 using SppdDocs.Core.Repositories;
 using SppdDocs.Infrastructure.DbAccess.Utils.Extensions;
-using SppdDocs.Infrastructure.DbAccess.Utils.Helpers;
 
 namespace SppdDocs.Infrastructure.DbAccess.Seeders
 {

@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Reflection;
+
 using AutoMapper;
+
 using log4net;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+
 using SppdDocs.Core;
 using SppdDocs.Core.Config;
 using SppdDocs.Core.Utils.Extensions;
 using SppdDocs.Core.Utils.Helpers;
 using SppdDocs.Extensions;
+
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace SppdDocs
