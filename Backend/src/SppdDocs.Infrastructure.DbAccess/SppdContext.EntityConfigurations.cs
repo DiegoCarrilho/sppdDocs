@@ -39,20 +39,6 @@ namespace SppdDocs.Infrastructure.DbAccess
                    .IsRequired();
         }
 
-        private void ConfigureCard<TEntity>(EntityTypeBuilder<TEntity> builder)
-            where TEntity : Card
-        {
-            ConfigureNamedEntity(builder);
-
-            builder.OwnsOne(card => card.DescriptionMarkdown)
-                   .Property(description => description.En)
-                   .IsRequired();
-
-            builder.OwnsOne(card => card.DescriptionOnCard)
-                   .Property(description => description.En)
-                   .IsRequired();
-        }
-
         private void ConfigureCardLevelUpgrade(EntityTypeBuilder<CardUpgrade> builder)
         {
             ConfigureBaseEntity(builder);
@@ -71,9 +57,22 @@ namespace SppdDocs.Infrastructure.DbAccess
                    .IsRequired();
 
             builder.HasIndex(e => e.FriendlyName)
-                   .HasAnnotation("CaseSensitive", false)
                    .IsUnique();
             builder.Property(e => e.FriendlyName)
+                   .IsRequired();
+        }
+
+        private void ConfigureCard<TEntity>(EntityTypeBuilder<TEntity> builder)
+            where TEntity : Card
+        {
+            ConfigureNamedEntity(builder);
+
+            builder.OwnsOne(card => card.DescriptionMarkdown)
+                   .Property(description => description.En)
+                   .IsRequired();
+
+            builder.OwnsOne(card => card.DescriptionOnCard)
+                   .Property(description => description.En)
                    .IsRequired();
         }
     }
