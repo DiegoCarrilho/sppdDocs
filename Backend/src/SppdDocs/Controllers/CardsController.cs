@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
 using AutoMapper;
+
 using Microsoft.AspNetCore.Mvc;
+
+using SppdDocs.Core.Domain.Entities;
 using SppdDocs.Core.Services;
 using SppdDocs.DTOs;
 
 namespace SppdDocs.Controllers
 {
+    /// <summary>
+    ///     Controller exposing the API available for <see cref="Card" />s.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class CardsController
@@ -20,16 +27,16 @@ namespace SppdDocs.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("{cardId}")]
-        public ActionResult<CardFullDto> Get(Guid cardId)
+        [HttpGet("{friendlyName}")]
+        public async Task<CardFullDto> Get(string friendlyName)
         {
-            return _mapper.Map<CardFullDto>(_cardService.GetCurrent(cardId));
+            return _mapper.Map<CardFullDto>(await _cardService.GetCurrentAsync(friendlyName));
         }
 
-        [HttpGet("all")]
-        public IEnumerable<CardFullDto> GetAll()
+        [HttpGet("FriendlyNames")]
+        public async Task<IEnumerable<string>> GetFriendlyNames()
         {
-            return _mapper.Map<IEnumerable<CardFullDto>>(_cardService.GetAllCurrent());
+            return await _cardService.GetFriendlyNamesAsync();
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
 using SppdDocs.Core.Domain.Entities;
 using SppdDocs.Core.Repositories;
 using SppdDocs.Core.Services;
@@ -16,15 +16,14 @@ namespace SppdDocs.Infrastructure.Services
             _cardRepository = cardRepository;
         }
 
-        public Card GetCurrent(Guid cardId)
+        public async Task<Card> GetCurrentAsync(string friendlyName)
         {
-            return _cardRepository.GetCardsFull()
-                                  .SingleOrDefault(card => card.Id == cardId);
+            return await _cardRepository.GetCurrentAsync(friendlyName);
         }
 
-        public IEnumerable<Card> GetAllCurrent()
+        public async Task<IEnumerable<string>> GetFriendlyNamesAsync()
         {
-            return _cardRepository.GetCardsFull().ToList();
+            return await _cardRepository.GetCurrentFriendlyNamesAsync();
         }
     }
 }

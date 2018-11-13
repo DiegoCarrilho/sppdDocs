@@ -14,8 +14,8 @@ namespace SppdDocs.MappingProfiles
                 .ForMember(dest => dest.UpgradeLevel, opt => opt.MapFrom(src => src.UpgradeLevel.CurrentUpgradeLevel))
                 .ForMember(dest => dest.MaximumUpgradeLevelInLevel, opt => opt.MapFrom(src => src.UpgradeLevel.MaximumUpgradeLevelInLevel))
                 .ForMember(dest => dest.IsLevelUpgrade, opt => opt.MapFrom(src => src.IsLevelUpgrade))
-                .ForMember(dest => dest.AttributeValues, opt => opt.MapFrom(src => src.AttributeValues.ToDictionary(k => k.Key.Id, k => k.Value)))
-                .ForMember(dest => dest.AttributeUpgradeValues, opt => opt.MapFrom(src => src.AttributeUpgrades.ToDictionary(k => k.Key.Id, k => k.Value)));
+                .ForMember(dest => dest.AttributeValues, opt => opt.MapFrom(src => src.AttributeValues.ToDictionary(k => k.Key.FriendlyName, k => k.Value)))
+                .ForMember(dest => dest.AttributeUpgradeValues, opt => opt.MapFrom(src => src.AttributeUpgrades.ToDictionary(k => k.Key.FriendlyName, k => k.Value)));
         }
     }
 }

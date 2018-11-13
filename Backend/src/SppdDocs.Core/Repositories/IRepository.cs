@@ -1,24 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using SppdDocs.Core.Domain.Entities;
-using SppdDocs.Core.Specifications;
 
 namespace SppdDocs.Core.Repositories
 {
     public interface IRepository<TEntity>
         where TEntity : BaseEntity
     {
-        TEntity GetById(Guid id);
-
-        TEntity GetSingleBySpec(ISpecification<TEntity> spec);
-
-        IEnumerable<TEntity> ListAll();
-
-        IEnumerable<TEntity> List(ISpecification<TEntity> spec);
+        Task<TEntity> GetAsync(Guid id);
 
         TEntity Add(TEntity entity);
 
-        void Update(TEntity entity);
+        TEntity Update(TEntity entity);
 
         void Delete(TEntity entity);
     }

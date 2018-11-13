@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace SppdDocs.DTOs
 {
@@ -8,8 +7,8 @@ namespace SppdDocs.DTOs
     /// </summary>
     public class CardUpgradeDto
     {
-        private IDictionary<Guid, double> _cardAttributeUpgradeValues;
-        private IDictionary<Guid, double> _cardAttributeValues;
+        private IDictionary<string, double> _cardAttributeUpgradeValues;
+        private IDictionary<string, double> _cardAttributeValues;
 
         /// <summary>
         ///     The internal upgrade level of the card (1 to 81 with 81 = UpgradeLevel + CardLevels count).
@@ -41,9 +40,9 @@ namespace SppdDocs.DTOs
         ///     The card attribute values for the upgrade level. E.g. Attack=45, Health=99, Range=2.<br />
         ///     Returns a dictionary with key=AttributeId; value=value.
         /// </summary>
-        public IDictionary<Guid, double> AttributeValues
+        public IDictionary<string, double> AttributeValues
         {
-            get => _cardAttributeValues ?? (_cardAttributeValues = new Dictionary<Guid, double>());
+            get => _cardAttributeValues ?? (_cardAttributeValues = new Dictionary<string, double>());
             set => _cardAttributeValues = value;
         }
 
@@ -51,9 +50,9 @@ namespace SppdDocs.DTOs
         ///     The card attribute values for the upgrade level. E.g. Attack=+10, Health=+34.<br />
         ///     Returns a dictionary with key=AttributeId; value=value.
         /// </summary>
-        public IDictionary<Guid, double> AttributeUpgradeValues
+        public IDictionary<string, double> AttributeUpgradeValues
         {
-            get => _cardAttributeUpgradeValues ?? (_cardAttributeUpgradeValues = new Dictionary<Guid, double>());
+            get => _cardAttributeUpgradeValues ?? (_cardAttributeUpgradeValues = new Dictionary<string, double>());
             set => _cardAttributeUpgradeValues = value;
         }
     }

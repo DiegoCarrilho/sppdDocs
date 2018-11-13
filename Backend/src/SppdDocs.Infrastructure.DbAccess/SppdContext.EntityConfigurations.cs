@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 using SppdDocs.Core.Domain.Entities;
 
 namespace SppdDocs.Infrastructure.DbAccess
@@ -11,20 +12,6 @@ namespace SppdDocs.Infrastructure.DbAccess
     /// <seealso cref="T:Microsoft.EntityFrameworkCore.DbContext" />
     internal partial class SppdContext
     {
-        private void ConfigureBaseEntity<TEntity>(EntityTypeBuilder<TEntity> builder)
-            where TEntity : BaseEntity
-        {
-            builder.Property(e => e.CreatedOnUtc)
-                   .HasDefaultValueSql(_databaseConfig.Value.SqlUtcDateGetter)
-                   .ValueGeneratedOnAdd()
-                   .IsRequired();
-            builder.Property(e => e.UpdatedOnUtc)
-                   .HasDefaultValueSql(_databaseConfig.Value.SqlUtcDateGetter)
-                   .ValueGeneratedOnAddOrUpdate()
-                   .IsConcurrencyToken()
-                   .IsRequired();
-        }
-
         public void ConfigureVersionedEntity<TEntity>(EntityTypeBuilder<TEntity> builder)
             where TEntity : VersionedEntity
         {
@@ -38,13 +25,17 @@ namespace SppdDocs.Infrastructure.DbAccess
             builder.Ignore(e => e.IsCurrent);
         }
 
-        private void ConfigureNamedEntity<TEntity>(EntityTypeBuilder<TEntity> builder)
-            where TEntity : NamedEntity
+        private void ConfigureBaseEntity<TEntity>(EntityTypeBuilder<TEntity> builder)
+            where TEntity : BaseEntity
         {
-            ConfigureVersionedEntity(builder);
-
-            builder.OwnsOne(e => e.Name)
-                   .Property(name => name.En)
+            builder.Property(e => e.CreatedOnUtc)
+                   .HasDefaultValueSql(_databaseConfig.Value.SqlUtcDateGetter)
+                   .ValueGeneratedOnAdd()
+                   .IsRequired();
+            builder.Property(e => e.UpdatedOnUtc)
+                   .HasDefaultValueSql(_databaseConfig.Value.SqlUtcDateGetter)
+                   .ValueGeneratedOnAddOrUpdate()
+                   .IsConcurrencyToken()
                    .IsRequired();
         }
 
@@ -68,6 +59,22 @@ namespace SppdDocs.Infrastructure.DbAccess
 
             builder.HasMany(c => c.CardAttributeUpgrades)
                    .WithOne(c => c.CardUpgrade);
+        }
+
+        private void ConfigureNamedEntity<TEntity>(EntityTypeBuilder<TEntity> builder)
+            where TEntity : NamedEntity
+        {
+            ConfigureVersionedEntity(builder);
+
+            builder.OwnsOne(e => e.Name)
+                   .Property(name => name.En)
+                   .IsRequired();
+
+            builder.HasIndex(e => e.FriendlyName)
+                   .HasAnnotation("CaseSensitive", false)
+                   .IsUnique();
+            builder.Property(e => e.FriendlyName)
+                   .IsRequired();
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using SppdDocs.Core.Domain.Entities;
 
 namespace SppdDocs.Core.Services
@@ -12,14 +12,15 @@ namespace SppdDocs.Core.Services
         /// <summary>
         ///     Gets the current card for the given card identifier.
         /// </summary>
-        /// <param name="cardId">The card identifier.</param>
-        /// <returns>The card if it could be found; otherwise <c>NULL</c></returns>
-        Card GetCurrent(Guid cardId);
+        /// <param name="friendlyName">Friendly name of the card.</param>
+        /// <returns>
+        ///     The card if it could be found; otherwise <c>NULL</c>
+        /// </returns>
+        Task<Card> GetCurrentAsync(string friendlyName);
 
         /// <summary>
-        ///     Gets all current cards.
+        ///     Gets the friendly names of all cards.
         /// </summary>
-        /// <returns>All current cards</returns>
-        IEnumerable<Card> GetAllCurrent();
+        Task<IEnumerable<string>> GetFriendlyNamesAsync();
     }
 }

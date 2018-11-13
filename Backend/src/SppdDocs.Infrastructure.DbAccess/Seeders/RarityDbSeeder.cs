@@ -23,26 +23,22 @@ namespace SppdDocs.Infrastructure.DbAccess.Seeders
             _rarityRepository.Add(new Rarity
                                   {
                                       Id = new Guid(SeederConstants.Rarity.COMMON_ID),
-                                      Name = new LocalizedText("Common"),
-                                      Image = ImageHelper.GetImageFromFilePath("")
+                                      Name = new LocalizedText("Common")
                                   }.SetDefaultSeederProperties());
             _rarityRepository.Add(new Rarity
                                   {
                                       Id = new Guid(SeederConstants.Rarity.RARE_ID),
-                                      Name = new LocalizedText("Rare"),
-                                      Image = ImageHelper.GetImageFromFilePath("")
+                                      Name = new LocalizedText("Rare")
                                   }.SetDefaultSeederProperties());
             _rarityRepository.Add(new Rarity
                                   {
                                       Id = new Guid(SeederConstants.Rarity.EPIC_ID),
-                                      Name = new LocalizedText("Epic"),
-                                      Image = ImageHelper.GetImageFromFilePath("")
+                                      Name = new LocalizedText("Epic")
                                   }.SetDefaultSeederProperties());
             _rarityRepository.Add(new Rarity
                                   {
                                       Id = new Guid(SeederConstants.Rarity.LEGENDARY_ID),
-                                      Name = new LocalizedText("Legendary"),
-                                      Image = ImageHelper.GetImageFromFilePath("")
+                                      Name = new LocalizedText("Legendary")
                                   }.SetDefaultSeederProperties());
         }
     }

@@ -10,7 +10,7 @@ namespace SppdDocs.Core.Domain.Entities
     /// <seealso cref="SppdDocs.Core.Domain.Entities.BaseEntity" />
     public class CardUpgrade : BaseEntity
     {
-        private IEnumerable<CardUpgradeCardAttributeValue> _cardAttributeValues;
+        private IEnumerable<CardUpgradeAttributeValue> _cardAttributeValues;
 
         /// <summary>
         ///     Current upgrade level
@@ -25,9 +25,9 @@ namespace SppdDocs.Core.Domain.Entities
         /// <summary>
         ///     CardAttributes which get improved when performing the upgrade
         /// </summary>
-        public IEnumerable<CardUpgradeCardAttributeValue> CardAttributeUpgrades
+        public IEnumerable<CardUpgradeAttributeValue> CardAttributeUpgrades
         {
-            get => _cardAttributeValues ?? (_cardAttributeValues = new List<CardUpgradeCardAttributeValue>());
+            get => _cardAttributeValues ?? (_cardAttributeValues = new List<CardUpgradeAttributeValue>());
             set => _cardAttributeValues = value;
         }
     }

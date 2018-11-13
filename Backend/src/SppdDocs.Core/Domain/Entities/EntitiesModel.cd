@@ -1,84 +1,84 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="SppdDocs.Core.Domain.Entities.CardAttribute">
-    <Position X="6.5" Y="8.75" Width="1.5" />
+    <Position X="6.5" Y="9.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Domain\Entities\CardAttribute.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SppdDocs.Core.Domain.Entities.BaseEntity">
-    <Position X="10.25" Y="1.25" Width="1.5" />
+    <Position X="10.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAACAAABAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Domain\Entities\BaseEntity.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SppdDocs.Core.Domain.Entities.Card">
-    <Position X="13.25" Y="8.75" Width="1.75" />
+    <Position X="13.25" Y="9.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>ACASAQAgAAgxCBAQAQIAgAACAAIgQAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>EBASAAIgAAgVCBAQAwIAggACAAIgQAABBAgABAAQACA=</HashCode>
       <FileName>Domain\Entities\Card.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SppdDocs.Core.Domain.Entities.CardClass">
-    <Position X="18" Y="8.75" Width="1.5" />
+    <Position X="18.5" Y="9.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Domain\Entities\CardClass.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SppdDocs.Core.Domain.Entities.CardEffect">
-    <Position X="8.75" Y="8.75" Width="1.5" />
+    <Position X="8.75" Y="9.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Domain\Entities\CardEffect.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SppdDocs.Core.Domain.Entities.CardStatusEffect">
-    <Position X="20.25" Y="8.75" Width="1.5" />
+    <Position X="20.75" Y="9.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Domain\Entities\CardStatusEffect.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SppdDocs.Core.Domain.Entities.CardTheme">
-    <Position X="11" Y="8.75" Width="1.5" />
+    <Position X="11" Y="9.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Domain\Entities\CardTheme.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SppdDocs.Core.Domain.Entities.NamedEntity">
-    <Position X="13.25" Y="6.5" Width="1.5" />
+    <Position X="13.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAQACAAAAAAAAAAQAAAAAAA=</HashCode>
       <FileName>Domain\Entities\NamedEntity.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SppdDocs.Core.Domain.Entities.Rarity">
-    <Position X="15.75" Y="8.75" Width="1.5" />
+    <Position X="16.25" Y="9.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Domain\Entities\Rarity.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SppdDocs.Core.Domain.Entities.VersionedEntity">
-    <Position X="13.25" Y="4.25" Width="1.5" />
+    <Position X="13.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAQAAAAQAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Domain\Entities\VersionedEntity.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SppdDocs.Core.Domain.Entities.CardUpgrade">
-    <Position X="0.5" Y="4.25" Width="2" />
+    <Position X="4.75" Y="4.25" Width="2" />
     <TypeIdentifier>
       <HashCode>CAAAAAAAAAAAACAAgAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Domain\Entities\CardUpgrade.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SppdDocs.Core.Domain.Entities.CardUpgradeCardAttributeValue">
-    <Position X="3.25" Y="4.25" Width="2.5" />
+  <Class Name="SppdDocs.Core.Domain.Entities.CardUpgradeAttributeValue">
+    <Position X="7.5" Y="4.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAgAAAAAAAAAgAAAAAAAAAABAAAgAAAAAAA=</HashCode>
       <FileName>Domain\Entities\CardUpgradeAttributeValue.cs</FileName>

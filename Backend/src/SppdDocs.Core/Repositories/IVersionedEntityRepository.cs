@@ -1,22 +1,23 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using SppdDocs.Core.Domain.Entities;
 
 namespace SppdDocs.Core.Repositories
 {
-    public interface IRepositoryVersioned<TEntity> : IRepository<TEntity>
+    public interface IVersionedEntityRepository<TEntity> : IRepository<TEntity>
         where TEntity : VersionedEntity
     {
         /// <summary>
         ///     Gets all current entities.
         /// </summary>
-        IQueryable<TEntity> GetAllCurrent();
+        Task<IEnumerable<TEntity>> GetAllCurrentAsync();
 
         /// <summary>
         ///     Gets the history for the given entity.
         /// </summary>
         /// <param name="entityId">The entity identifier.</param>
-        IQueryable<TEntity> GetHistory(Guid entityId);
+        Task<IEnumerable<TEntity>> GetHistoryAsync(Guid entityId);
 
         /// <summary>
         ///     Gets the entity for the given IDs.
@@ -24,11 +25,11 @@ namespace SppdDocs.Core.Repositories
         /// <param name="entityId">The entity identifier.</param>
         /// <param name="versionId">The version identifier.</param>
         /// <returns></returns>
-        TEntity Get(Guid entityId, Guid versionId);
+        Task<TEntity> GetAsync(Guid entityId, Guid versionId);
 
         /// <summary>
         ///     Gets the current entity.
         /// </summary>
-        TEntity GetCurrent(Guid entityId);
+        Task<TEntity> GetCurrentAsync(Guid entityId);
     }
 }

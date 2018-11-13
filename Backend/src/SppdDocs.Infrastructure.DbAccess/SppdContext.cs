@@ -39,7 +39,7 @@ namespace SppdDocs.Infrastructure.DbAccess
 
             builder.Entity<CardAttribute>(ConfigureNamedEntity);
             builder.Entity<CardUpgrade>(ConfigureCardLevelUpgrade);
-            builder.Entity<CardUpgradeCardAttributeValue>(ConfigureBaseEntity);
+            builder.Entity<CardUpgradeAttributeValue>(ConfigureBaseEntity);
 
             builder.Entity<Card>(ConfigureCard);
         }

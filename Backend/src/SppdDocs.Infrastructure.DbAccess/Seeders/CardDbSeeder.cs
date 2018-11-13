@@ -47,24 +47,24 @@ namespace SppdDocs.Infrastructure.DbAccess.Seeders
                                                        {
                                                            UpgradeFrom = 0,
                                                            UpgradeTo = 1,
-                                                           CardAttributeUpgrades = new List<CardUpgradeCardAttributeValue>
+                                                           CardAttributeUpgrades = new List<CardUpgradeAttributeValue>
                                                                                    {
-                                                                                       new CardUpgradeCardAttributeValue
+                                                                                       new CardUpgradeAttributeValue
                                                                                        {
                                                                                            CardAttributeId = new Guid(SeederConstants.CardAttribute.CARD_UPGRADES_ID),
                                                                                            Value = 5
                                                                                        },
-                                                                                       new CardUpgradeCardAttributeValue
+                                                                                       new CardUpgradeAttributeValue
                                                                                        {
                                                                                            CardAttributeId = new Guid(SeederConstants.CardAttribute.HEALTH_ID),
                                                                                            Value = 272
                                                                                        },
-                                                                                       new CardUpgradeCardAttributeValue
+                                                                                       new CardUpgradeAttributeValue
                                                                                        {
                                                                                            CardAttributeId = new Guid(SeederConstants.CardAttribute.ATTACK_ID),
                                                                                            Value = 60
                                                                                        },
-                                                                                       new CardUpgradeCardAttributeValue
+                                                                                       new CardUpgradeAttributeValue
                                                                                        {
                                                                                            CardAttributeId = new Guid(SeederConstants.CardAttribute.DAMAGE_ALL_ID),
                                                                                            Value = 200
@@ -75,9 +75,9 @@ namespace SppdDocs.Infrastructure.DbAccess.Seeders
                                                        {
                                                            UpgradeFrom = 1,
                                                            UpgradeTo = 2,
-                                                           CardAttributeUpgrades = new List<CardUpgradeCardAttributeValue>
+                                                           CardAttributeUpgrades = new List<CardUpgradeAttributeValue>
                                                                                    {
-                                                                                       new CardUpgradeCardAttributeValue
+                                                                                       new CardUpgradeAttributeValue
                                                                                        {
                                                                                            CardAttributeId = new Guid(SeederConstants.CardAttribute.HEALTH_ID),
                                                                                            Value = 9
@@ -88,9 +88,9 @@ namespace SppdDocs.Infrastructure.DbAccess.Seeders
                                                        {
                                                            UpgradeFrom = 2,
                                                            UpgradeTo = 3,
-                                                           CardAttributeUpgrades = new List<CardUpgradeCardAttributeValue>
+                                                           CardAttributeUpgrades = new List<CardUpgradeAttributeValue>
                                                                                    {
-                                                                                       new CardUpgradeCardAttributeValue
+                                                                                       new CardUpgradeAttributeValue
                                                                                        {
                                                                                            CardAttributeId = new Guid(SeederConstants.CardAttribute.ATTACK_ID),
                                                                                            Value = 4
@@ -101,9 +101,9 @@ namespace SppdDocs.Infrastructure.DbAccess.Seeders
                                                        {
                                                            UpgradeFrom = 3,
                                                            UpgradeTo = 4,
-                                                           CardAttributeUpgrades = new List<CardUpgradeCardAttributeValue>
+                                                           CardAttributeUpgrades = new List<CardUpgradeAttributeValue>
                                                                                    {
-                                                                                       new CardUpgradeCardAttributeValue
+                                                                                       new CardUpgradeAttributeValue
                                                                                        {
                                                                                            CardAttributeId = new Guid(SeederConstants.CardAttribute.HEALTH_ID),
                                                                                            Value = 11
@@ -114,9 +114,9 @@ namespace SppdDocs.Infrastructure.DbAccess.Seeders
                                                        {
                                                            UpgradeFrom = 4,
                                                            UpgradeTo = 5,
-                                                           CardAttributeUpgrades = new List<CardUpgradeCardAttributeValue>
+                                                           CardAttributeUpgrades = new List<CardUpgradeAttributeValue>
                                                                                    {
-                                                                                       new CardUpgradeCardAttributeValue
+                                                                                       new CardUpgradeAttributeValue
                                                                                        {
                                                                                            CardAttributeId = new Guid(SeederConstants.CardAttribute.DAMAGE_ALL_ID),
                                                                                            Value = 36
@@ -127,19 +127,19 @@ namespace SppdDocs.Infrastructure.DbAccess.Seeders
                                                        {
                                                            UpgradeFrom = 5,
                                                            UpgradeTo = 6,
-                                                           CardAttributeUpgrades = new List<CardUpgradeCardAttributeValue>
+                                                           CardAttributeUpgrades = new List<CardUpgradeAttributeValue>
                                                                                    {
-                                                                                       new CardUpgradeCardAttributeValue
+                                                                                       new CardUpgradeAttributeValue
                                                                                        {
                                                                                            CardAttributeId = new Guid(SeederConstants.CardAttribute.CARD_UPGRADES_ID),
                                                                                            Value = 10
                                                                                        },
-                                                                                       new CardUpgradeCardAttributeValue
+                                                                                       new CardUpgradeAttributeValue
                                                                                        {
                                                                                            CardAttributeId = new Guid(SeederConstants.CardAttribute.ATTACK_ID),
                                                                                            Value = 12
                                                                                        },
-                                                                                       new CardUpgradeCardAttributeValue
+                                                                                       new CardUpgradeAttributeValue
                                                                                        {
                                                                                            CardAttributeId = new Guid(SeederConstants.CardAttribute.HEALTH_ID),
                                                                                            Value = 54

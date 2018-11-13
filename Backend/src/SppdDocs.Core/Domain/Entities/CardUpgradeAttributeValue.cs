@@ -6,10 +6,10 @@ namespace SppdDocs.Core.Domain.Entities
     ///     Holds the value for a card upgrade.
     /// </summary>
     /// <seealso cref="SppdDocs.Core.Domain.Entities.BaseEntity" />
-    public class CardUpgradeCardAttributeValue : BaseEntity
+    public class CardUpgradeAttributeValue : BaseEntity
     {
         /// <summary>
-        ///     The <see cref="Entities.CardUpgrade" /> holding a reference to this <see cref="CardUpgradeCardAttributeValue" />.
+        ///     The <see cref="Entities.CardUpgrade" /> holding a reference to this <see cref="CardUpgradeAttributeValue" />.
         /// </summary>
         public CardUpgrade CardUpgrade { get; set; }
 

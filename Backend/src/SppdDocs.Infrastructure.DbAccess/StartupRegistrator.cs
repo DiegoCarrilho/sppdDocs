@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+
 using log4net;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+
 using SppdDocs.Core;
 using SppdDocs.Core.Config;
 using SppdDocs.Core.Repositories;
@@ -29,8 +32,7 @@ namespace SppdDocs.Infrastructure.DbAccess
 
             // Repositories
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped(typeof(IAsyncRepository<>), typeof(Repository<>));
-            services.AddScoped(typeof(IRepositoryVersioned<>), typeof(RepositoryVersioned<>));
+            services.AddScoped(typeof(IVersionedEntityRepository<>), typeof(VersionedEntityRepository<>));
 
             services.AddScoped(typeof(ICardRepository), typeof(CardRepository));
 
@@ -68,6 +70,7 @@ namespace SppdDocs.Infrastructure.DbAccess
                         s_logger.Debug("Database has been deleted");
                     }
 
+                    //DbInterception.Add(new CreateDatabaseCollationInterceptor("Latin1_General_100_CI_AS"));
                     if (context.Database.EnsureCreated())
                     {
                         s_logger.Debug("Database has been created");

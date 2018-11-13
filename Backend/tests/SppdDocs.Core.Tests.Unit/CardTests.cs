@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
 using SppdDocs.Core.Domain.Entities;
 using SppdDocs.Core.Domain.Objects;
+
 using Xunit;
 
 // ReSharper disable ParameterOnlyUsedForPreconditionCheck.Local
@@ -20,7 +22,7 @@ namespace SppdDocs.Core.Tests.Unit
 
         private Card _card;
         private List<CardAttribute> _cardAttributes;
-        private List<CardUpgradeCardAttributeValue> _cardUpgradeCardAttributeValues;
+        private List<CardUpgradeAttributeValue> _cardUpgradeAttributeValues;
         private List<CardUpgrade> _cardUpgrades;
 
         private void SetupPrivateFields()
@@ -33,29 +35,29 @@ namespace SppdDocs.Core.Tests.Unit
                                   new CardAttribute {Name = new LocalizedText("CardAttribute4")}
                               };
 
-            _cardUpgradeCardAttributeValues = new List<CardUpgradeCardAttributeValue>
+            _cardUpgradeAttributeValues = new List<CardUpgradeAttributeValue>
+                                          {
+                                              new CardUpgradeAttributeValue
                                               {
-                                                  new CardUpgradeCardAttributeValue
-                                                  {
-                                                      CardAttribute = _cardAttributes[0],
-                                                      Value = 7
-                                                  },
-                                                  new CardUpgradeCardAttributeValue
-                                                  {
-                                                      CardAttribute = _cardAttributes[1],
-                                                      Value = 9
-                                                  },
-                                                  new CardUpgradeCardAttributeValue
-                                                  {
-                                                      CardAttribute = _cardAttributes[2],
-                                                      Value = 12
-                                                  },
-                                                  new CardUpgradeCardAttributeValue
-                                                  {
-                                                      CardAttribute = _cardAttributes[3],
-                                                      Value = 3
-                                                  }
-                                              };
+                                                  CardAttribute = _cardAttributes[0],
+                                                  Value = 7
+                                              },
+                                              new CardUpgradeAttributeValue
+                                              {
+                                                  CardAttribute = _cardAttributes[1],
+                                                  Value = 9
+                                              },
+                                              new CardUpgradeAttributeValue
+                                              {
+                                                  CardAttribute = _cardAttributes[2],
+                                                  Value = 12
+                                              },
+                                              new CardUpgradeAttributeValue
+                                              {
+                                                  CardAttribute = _cardAttributes[3],
+                                                  Value = 3
+                                              }
+                                          };
 
             _cardUpgrades = new List<CardUpgrade>
                             {
@@ -63,37 +65,37 @@ namespace SppdDocs.Core.Tests.Unit
                                 {
                                     UpgradeFrom = 0,
                                     UpgradeTo = 1,
-                                    CardAttributeUpgrades = new[] {_cardUpgradeCardAttributeValues[0], _cardUpgradeCardAttributeValues[1]}
+                                    CardAttributeUpgrades = new[] {_cardUpgradeAttributeValues[0], _cardUpgradeAttributeValues[1]}
                                 },
                                 new CardUpgrade
                                 {
                                     UpgradeFrom = 1,
                                     UpgradeTo = 2,
-                                    CardAttributeUpgrades = new[] {_cardUpgradeCardAttributeValues[2], _cardUpgradeCardAttributeValues[3]}
+                                    CardAttributeUpgrades = new[] {_cardUpgradeAttributeValues[2], _cardUpgradeAttributeValues[3]}
                                 },
                                 new CardUpgrade
                                 {
                                     UpgradeFrom = 2,
                                     UpgradeTo = 3,
-                                    CardAttributeUpgrades = new[] {_cardUpgradeCardAttributeValues[2], _cardUpgradeCardAttributeValues[0]}
+                                    CardAttributeUpgrades = new[] {_cardUpgradeAttributeValues[2], _cardUpgradeAttributeValues[0]}
                                 },
                                 new CardUpgrade
                                 {
                                     UpgradeFrom = 3,
                                     UpgradeTo = 4,
-                                    CardAttributeUpgrades = new[] {_cardUpgradeCardAttributeValues[3], _cardUpgradeCardAttributeValues[1]}
+                                    CardAttributeUpgrades = new[] {_cardUpgradeAttributeValues[3], _cardUpgradeAttributeValues[1]}
                                 },
                                 new CardUpgrade
                                 {
                                     UpgradeFrom = 4,
                                     UpgradeTo = 5,
-                                    CardAttributeUpgrades = new[] {_cardUpgradeCardAttributeValues[1], _cardUpgradeCardAttributeValues[2]}
+                                    CardAttributeUpgrades = new[] {_cardUpgradeAttributeValues[1], _cardUpgradeAttributeValues[2]}
                                 },
                                 new CardUpgrade
                                 {
                                     UpgradeFrom = 5,
                                     UpgradeTo = 6,
-                                    CardAttributeUpgrades = new[] {_cardUpgradeCardAttributeValues[3], _cardUpgradeCardAttributeValues[1]}
+                                    CardAttributeUpgrades = new[] {_cardUpgradeAttributeValues[3], _cardUpgradeAttributeValues[1]}
                                 }
                             };
 

@@ -23,38 +23,32 @@ namespace SppdDocs.Infrastructure.DbAccess.Seeders
             _cardClassRepository.Add(new CardClass
                                      {
                                          Id = new Guid(SeederConstants.CardClass.FIGHTER_ID),
-                                         Name = new LocalizedText("Fighter"),
-                                         Image = ImageHelper.GetImageFromFilePath("")
+                                         Name = new LocalizedText("Fighter")
                                      }.SetDefaultSeederProperties());
             _cardClassRepository.Add(new CardClass
                                      {
                                          Id = new Guid(SeederConstants.CardClass.ASSASSIN_ID),
-                                         Name = new LocalizedText("Assassin"),
-                                         Image = ImageHelper.GetImageFromFilePath("")
+                                         Name = new LocalizedText("Assassin")
                                      }.SetDefaultSeederProperties());
             _cardClassRepository.Add(new CardClass
                                      {
                                          Id = new Guid(SeederConstants.CardClass.RANGED_ID),
-                                         Name = new LocalizedText("Ranged"),
-                                         Image = ImageHelper.GetImageFromFilePath("")
+                                         Name = new LocalizedText("Ranged")
                                      }.SetDefaultSeederProperties());
             _cardClassRepository.Add(new CardClass
                                      {
                                          Id = new Guid(SeederConstants.CardClass.SPELL_ID),
-                                         Name = new LocalizedText("Spell"),
-                                         Image = ImageHelper.GetImageFromFilePath("")
+                                         Name = new LocalizedText("Spell")
                                      }.SetDefaultSeederProperties());
             _cardClassRepository.Add(new CardClass
                                      {
                                          Id = new Guid(SeederConstants.CardClass.TANK_ID),
-                                         Name = new LocalizedText("Tank"),
-                                         Image = ImageHelper.GetImageFromFilePath("")
+                                         Name = new LocalizedText("Tank")
                                      }.SetDefaultSeederProperties());
             _cardClassRepository.Add(new CardClass
                                      {
                                          Id = new Guid(SeederConstants.CardClass.TOTEM_ID),
-                                         Name = new LocalizedText("Totem"),
-                                         Image = ImageHelper.GetImageFromFilePath("")
+                                         Name = new LocalizedText("Totem")
                                      }.SetDefaultSeederProperties());
         }
     }
